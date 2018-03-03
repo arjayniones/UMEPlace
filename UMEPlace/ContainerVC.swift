@@ -28,21 +28,55 @@ class ContainerVC: UIViewController{
         
        self.hideBottomMenu()
         NotificationCenter.default.post(name: NSNotification.Name("ShowChat"), object: nil)
+        
+        
+        if sideMenuOpen == true {
+        toggleSideMenu()
+        }
+        
+        if isYellowPopUpShown == true{
+        togglePopUp()
+        }
     }
     
     @IBAction func showMessages(_ sender: Any) {
         
         NotificationCenter.default.post(name: NSNotification.Name("ShowMessages"), object: nil)
+        
+        if sideMenuOpen == true {
+            toggleSideMenu()
+        }
+        
+        if isYellowPopUpShown == true{
+            togglePopUp()
+        }
     }
     
     @IBAction func showShare(_ sender: Any) {
         
         NotificationCenter.default.post(name: NSNotification.Name("ShowShareLearn"), object: nil)
+        
+        if sideMenuOpen == true {
+            toggleSideMenu()
+        }
+        
+        if isYellowPopUpShown == true{
+            togglePopUp()
+        }
+        
     }
     
     
     @IBAction func showLearnings(_ sender: Any) {
         NotificationCenter.default.post(name: NSNotification.Name("ShowAdvise"), object: nil)
+        
+        if sideMenuOpen == true {
+            toggleSideMenu()
+        }
+        
+        if isYellowPopUpShown == true{
+            togglePopUp()
+        }
     }
     
     @IBAction func showAdvice(_ sender: Any) {
@@ -52,9 +86,10 @@ class ContainerVC: UIViewController{
     
        togglePopUp()
         
-   
-        
-        
+        if sideMenuOpen == true {
+            toggleSideMenu()
+        }
+       
     
     }
     
@@ -119,6 +154,18 @@ class ContainerVC: UIViewController{
         }
     }
     
+     @objc func toggleSideMenuForHome(){
+        
+        if sideMenuOpen{
+        sideMenuOpen = false
+        sideMenuConstraint.constant = -226
+        
+        UIView.animate(withDuration: 0.3){
+            self.view.layoutIfNeeded()
+        }
+      }
+        
+    }
     
     
     @IBAction func showShareLessonPageInput(_ sender: Any) {
@@ -169,6 +216,11 @@ class ContainerVC: UIViewController{
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(toggleSideMenu),
                                                name: Notification.Name("ToggleSideMenu"),
+                                               object: nil )
+        
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(toggleSideMenuForHome),
+                                               name: Notification.Name("ToggleSideMenuForHome"),
                                                object: nil )
         
         

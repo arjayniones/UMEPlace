@@ -29,33 +29,51 @@ class SideMenuViewController: UIViewController {
     
     @IBAction func showMindDiary(_ sender: Any) {
          NotificationCenter.default.post(name: NSNotification.Name("ShowMindDiaryPage"), object: nil)
+        
+      NotificationCenter.default.post(name: NSNotification.Name("ShowBottomMenu"), object: nil)
+        
         toggleSideMenu()
     }
     
     @IBAction func showWLAChart(_ sender: Any) {
          NotificationCenter.default.post(name: NSNotification.Name("ShowWLAChartPage"), object: nil)
+        
+        NotificationCenter.default.post(name: NSNotification.Name("ShowBottomMenu"), object: nil)
+        
         toggleSideMenu()
     }
     
     
     @IBAction func showAdvicesActivities(_ sender: Any) {
         NotificationCenter.default.post(name: NSNotification.Name("ShowAdvicesActivitiesPage"), object: nil)
+        
+        NotificationCenter.default.post(name: NSNotification.Name("ShowBottomMenu"), object: nil)
+        
         toggleSideMenu()
     }
     
     @IBAction func showLessonsActivities(_ sender: Any) {
-        NotificationCenter.default.post(name: NSNotification.Name("ShowLessonsActivities"), object: nil)
+        NotificationCenter.default.post(name: NSNotification.Name("ShowLessonsActivitiesPage"), object: nil)
+        
+        NotificationCenter.default.post(name: NSNotification.Name("ShowBottomMenu"), object: nil)
+        
         toggleSideMenu()
     }
     
     
     @IBAction func showGiveFoodToSoda(_ sender: Any) {
         NotificationCenter.default.post(name: NSNotification.Name("ShowGiveFoodToSoda"), object: nil)
+        
+        NotificationCenter.default.post(name: NSNotification.Name("HideBottomMenu"), object: nil)
+        
         toggleSideMenu()
     }
     
     @IBAction func showGiveThingsToSoda(_ sender: Any) {
-        NotificationCenter.default.post(name: NSNotification.Name("ShowAdvise"), object: nil)
+        NotificationCenter.default.post(name: NSNotification.Name("ShowGiveThingsToSoda"), object: nil)
+        
+        NotificationCenter.default.post(name: NSNotification.Name("HideBottomMenu"), object: nil)
+        
         toggleSideMenu()
     }
     
@@ -69,16 +87,21 @@ class SideMenuViewController: UIViewController {
   
     
     @IBAction func showAccountInfo(_ sender: Any) {
+        NotificationCenter.default.post(name: NSNotification.Name("ShowBottomMenu"), object: nil)
     }
     
     
     @IBAction func showSettings(_ sender: Any) {
+        NotificationCenter.default.post(name: NSNotification.Name("ShowBottomMenu"), object: nil)
     }
     
     @IBAction func showTutorialAndHelp(_ sender: Any) {
+        NotificationCenter.default.post(name: NSNotification.Name("ShowBottomMenu"), object: nil)
     }
     
+    
     @IBAction func showAbout(_ sender: Any) {
+        NotificationCenter.default.post(name: NSNotification.Name("ShowBottomMenu"), object: nil)
     }
    
     

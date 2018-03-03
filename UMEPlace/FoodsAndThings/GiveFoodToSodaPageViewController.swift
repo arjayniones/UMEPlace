@@ -41,6 +41,10 @@ class GiveFoodToSodaPageViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        NotificationCenter.default.post(name: NSNotification.Name("ShowBottomMenu"), object: nil)
+    }
+    
     
     @IBAction func btnTab1Clicked(_ sender: HalfRoundButton) {
         

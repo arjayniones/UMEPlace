@@ -122,7 +122,7 @@ class AdviceDetailsViewController: UIViewController {
         
         //back to Share lesson feeds
         
-        NotificationCenter.default.post(name: NSNotification.Name("ShowShareLearn"), object: nil)
+        NotificationCenter.default.post(name: NSNotification.Name("ShowAdvise"), object: nil)
     }
     
     

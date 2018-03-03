@@ -151,13 +151,26 @@ class MainVC: UIViewController {
         //ShowAdvicesOwner
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(showAdvicesOwnerPage),
-                                               name: Notification.Name("ShowAdvicesActivityPage"),
+                                               name: Notification.Name("ShowAdvicesActivitiesPage"),
                                                object: nil )
         
         //ShowLessonsOwner
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(showLessonsOwnerPage),
-                                               name: Notification.Name("ShowLessonsActivityPage"),
+                                               name: Notification.Name("ShowLessonsActivitiesPage"),
+                                               object: nil )
+        
+        
+        //Show Food and Things to Soda
+        
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(showGiveFoodToSoda),
+                                               name: Notification.Name("ShowGiveFoodToSoda"),
+                                               object: nil )
+        
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(showGiveThingsToSoda),
+                                               name: Notification.Name("ShowGiveThingsToSoda"),
                                                object: nil )
         
     }
@@ -193,6 +206,9 @@ class MainVC: UIViewController {
     //bottom and side menu actions
     
     @objc func showHome(){
+        
+       
+        NotificationCenter.default.post(name: NSNotification.Name("ToggleSideMenu"), object: nil)
         
         NotificationCenter.default.post(name: NSNotification.Name("ShowBottomMenu"), object: nil)
         //performSegue(withIdentifier: "ShowChat", sender: nil)
@@ -323,6 +339,7 @@ class MainVC: UIViewController {
     
     @IBAction func onHomeMenuTapped(_ sender: Any) {
         
+        NotificationCenter.default.post(name: NSNotification.Name("ToggleSideMenuForHome"), object: nil)
         hideKeyboardWhenTappedAround()
         
           NotificationCenter.default.post(name: NSNotification.Name("ShowBottomMenu"), object: nil)
@@ -388,7 +405,6 @@ class MainVC: UIViewController {
     //Function to navigate from main
     @objc func showInputPageShareLesson(){
         performSegue(withIdentifier: "ShowInputPageShareLesson", sender: nil)
-        self.mainNavigationBarTitle.title = "Lesson"
         
 
         
@@ -397,12 +413,36 @@ class MainVC: UIViewController {
     
     @objc func showInputPageAskAdvise(){
         performSegue(withIdentifier: "ShowInputPageAskAdvise", sender: nil)
-        self.mainNavigationBarTitle.title = "Ask for Advise"
+        
         
 
         
         self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
     }
+    
+    //perform segues
+    
+    @objc func showGiveFoodToSoda(){
+        performSegue(withIdentifier: "ShowGiveFoodPage", sender: nil)
+        
+        
+        
+        
+        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+    }
+    
+    @objc func showGiveThingsToSoda(){
+        performSegue(withIdentifier: "GiveThingsPage", sender: nil)
+        
+        
+        
+        
+        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+    }
+    
+    
+    
+    
     
     @objc func showShareLessonDetailsPage(){
         
