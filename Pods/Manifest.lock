@@ -1,0 +1,15 @@
+PODS:
+  - JTAppleCalendar (7.1.5)
+  - SwiftGifOrigin (1.6.1)
+
+DEPENDENCIES:
+  - JTAppleCalendar (~> 7.0)
+  - SwiftGifOrigin (~> 1.6.1)
+
+SPEC CHECKSUMS:
+  JTAppleCalendar: 2d4f974f9f3c8b4964d51ca1f6e004883c031fbe
+  SwiftGifOrigin: d6679d3ebe9df2e049a84bc52582635107b581f6
+
+PODFILE CHECKSUM: 62f137274e49dfe6bb7fe0c88048e931b46de0be
+
+COCOAPODS: 1.4.0
