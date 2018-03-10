@@ -1,0 +1,8 @@
+
+App Thinning Size Report for All Variants of MindLook
+
+Variant: MindLook-iPad mini 4.ipa
+Supported devices: iPad mini 4
+App + On Demand Resources size: 40.2 MB compressed, 48.2 MB uncompressed
+App size: 40.2 MB compressed, 48.2 MB uncompressed
+On Demand Resources size: Zero KB compressed, Zero KB uncompressed
