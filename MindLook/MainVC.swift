@@ -18,6 +18,36 @@ class MainVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
+    //custom navigation bar item size
+        
+        let btnMenu = UIButton(type: .custom)
+        btnMenu.setBackgroundImage(UIImage(named: "menu_list"), for: .normal)
+
+//        btnMenu.frame = CGRect(x: 0, y: 0, width: 20, height: 20)
+
+        // Usage
+        btnMenu.applyNavBarConstraints(size: (width: 30, height: 30))
+
+        btnMenu.addTarget(self, action: #selector(onSideMenuTapped), for: .touchUpInside)
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: btnMenu)
+
+        
+        
+        let btnHome = UIButton(type: .custom)
+        
+        // Usage
+        btnHome.applyNavBarConstraints(size: (width: 30, height: 30))
+        
+        //         btnHome.frame = CGRect(x: 0, y: 0, width: 20, height: 20)
+        btnHome.setBackgroundImage(UIImage(named: "menu_home"), for: .normal)
+
+        btnHome.addTarget(self, action: #selector(MainVC.onHomeMenuTapped(_:)), for: .touchUpInside)
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: btnHome)
+
+        
+        
+        
         //humberger menu pages notifications
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(showProfile),
@@ -173,6 +203,29 @@ class MainVC: UIViewController {
                                                name: Notification.Name("ShowGiveThingsToSoda"),
                                                object: nil )
         
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(showAboutPage),
+                                               name: Notification.Name("ShowAboutPage"),
+                                               object: nil )
+        
+        
+        
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(showTutorialHelpPage),
+                                               name: Notification.Name("ShowTutorialHelpPage"),
+                                               object: nil )
+        
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(showProfile),
+                                               name: Notification.Name("ShowProfilePage"),
+                                               object: nil )
+        
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(showSettings),
+                                               name: Notification.Name("ShowAccountPage"),
+                                               object: nil )
+        
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -180,28 +233,7 @@ class MainVC: UIViewController {
     }
     
     
-    
-    
-    
-    //functions for clicking menus
-    
-    //humberger menu actions
-    @objc func showProfile(){
-        
-        performSegue(withIdentifier: "ShowProfile", sender: nil)
-        
-        self.mainNavigationBarTitle.title = "PROFILE"
-    }
-    
-    @objc func showSettings(){
-        performSegue(withIdentifier: "ShowSettings", sender: nil)
-        
-        self.mainNavigationBarTitle.title = "SETTINGS"
-    }
-    @objc func showSignIn(){
-        performSegue(withIdentifier: "ShowSignIn", sender: nil)
-        self.mainNavigationBarTitle.title = "SIGN IN"
-    }
+
     
     //bottom and side menu actions
     
@@ -658,4 +690,112 @@ class MainVC: UIViewController {
         
         self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
     }
+    
+    @objc func showAboutPage(){
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let controller: UIViewController = storyboard.instantiateViewController(withIdentifier: "AboutPage") as! AboutMindLookViewController
+        
+        //add as a childviewcontroller
+        addChildViewController(controller)
+        
+        // Add the child's View as a subview
+        self.mainContainerView.addSubview(controller.view)
+        controller.view.frame = view.bounds
+        controller.view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        
+        // tell the childviewcontroller it's contained in it's parent
+        controller.didMove(toParentViewController: self)
+        
+        
+        
+        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+    }
+    
+    @objc func showTutorialHelpPage(){
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let controller: UIViewController = storyboard.instantiateViewController(withIdentifier: "TutorialHelpPage") as! TutorialHelpViewController
+        
+        //add as a childviewcontroller
+        addChildViewController(controller)
+        
+        // Add the child's View as a subview
+        self.mainContainerView.addSubview(controller.view)
+        controller.view.frame = view.bounds
+        controller.view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        
+        // tell the childviewcontroller it's contained in it's parent
+        controller.didMove(toParentViewController: self)
+        
+        
+        
+        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+    }
+    
+    
+    
+    @objc func showProfile(){
+        
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let controller: UIViewController = storyboard.instantiateViewController(withIdentifier: "ProfilePage") as! ProfilePageViewController
+        
+        //add as a childviewcontroller
+        addChildViewController(controller)
+        
+        // Add the child's View as a subview
+        self.mainContainerView.addSubview(controller.view)
+        controller.view.frame = view.bounds
+        controller.view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        
+        // tell the childviewcontroller it's contained in it's parent
+        controller.didMove(toParentViewController: self)
+        
+        
+        
+        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        
+        
+        
+        
+    }
+    
+    @objc func showSettings(){
+        
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let controller: UIViewController = storyboard.instantiateViewController(withIdentifier: "AccountPage") as! AccountPageViewController
+        
+        //add as a childviewcontroller
+        addChildViewController(controller)
+        
+        // Add the child's View as a subview
+        self.mainContainerView.addSubview(controller.view)
+        controller.view.frame = view.bounds
+        controller.view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        
+        // tell the childviewcontroller it's contained in it's parent
+        controller.didMove(toParentViewController: self)
+        
+        
+        
+        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        
+        
+        
+    }
+    @objc func showSignIn(){
+        
+        
+        
+    }
+    
 }
+
+extension UIView {
+    func applyNavBarConstraints(size: (width: CGFloat, height: CGFloat)) {
+        let widthConstraint = self.widthAnchor.constraint(equalToConstant: size.width)
+        let heightConstraint = self.heightAnchor.constraint(equalToConstant: size.height)
+        heightConstraint.isActive = true
+        widthConstraint.isActive = true
+    }
+}
+
+

@@ -86,22 +86,36 @@ class SideMenuViewController: UIViewController {
     
   
     
-    @IBAction func showAccountInfo(_ sender: Any) {
-        NotificationCenter.default.post(name: NSNotification.Name("ShowBottomMenu"), object: nil)
+    @IBAction func showProfile(_ sender: Any) {
+        self.toggleSideMenu()
+        NotificationCenter.default.post(name: NSNotification.Name("HideBottomMenu"), object: nil)
+        
+         NotificationCenter.default.post(name: NSNotification.Name("ShowProfilePage"), object: nil)
+        
+        
     }
     
     
-    @IBAction func showSettings(_ sender: Any) {
-        NotificationCenter.default.post(name: NSNotification.Name("ShowBottomMenu"), object: nil)
+    @IBAction func showAccount(_ sender: Any) {
+       
+        self.toggleSideMenu()
+        NotificationCenter.default.post(name: NSNotification.Name("HideBottomMenu"), object: nil)
+        
+        NotificationCenter.default.post(name: NSNotification.Name("ShowAccountPage"), object: nil)
     }
     
     @IBAction func showTutorialAndHelp(_ sender: Any) {
+       
+        self.toggleSideMenu()
         NotificationCenter.default.post(name: NSNotification.Name("ShowBottomMenu"), object: nil)
+         NotificationCenter.default.post(name: NSNotification.Name("ShowTutorialHelpPage"), object: nil)
     }
     
     
     @IBAction func showAbout(_ sender: Any) {
+       self.toggleSideMenu()
         NotificationCenter.default.post(name: NSNotification.Name("ShowBottomMenu"), object: nil)
+        NotificationCenter.default.post(name: NSNotification.Name("ShowAboutPage"), object: nil)
     }
    
     

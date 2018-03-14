@@ -10,8 +10,35 @@ import UIKit
 
 class MessagesPageViewController: UIViewController,UITableViewDataSource,UITableViewDelegate {
     
+    var isSelected = true
+    let darkGreen = UIColor(red:0.03, green:0.59, blue:0.29, alpha:1.0)
     
     @IBOutlet weak var viewTitle: UIView!
+    
+    @IBOutlet weak var btnUnread: UIButton!
+    
+    @IBOutlet weak var lblUnread: UILabel!
+    
+    @IBAction func btnUnreadClicked(_ sender: Any) {
+        
+        if isSelected == false {
+            isSelected = true
+            self.btnUnread.setImage(UIImage(named: "checked"), for: UIControlState.normal)
+            
+            self.lblUnread.textColor = darkGreen
+        }else{
+            
+            isSelected = false
+            self.btnUnread.setImage(UIImage(named: "uncheck"), for: UIControlState.normal)
+            
+          
+            
+            self.lblUnread.textColor = UIColor.white
+        }
+    }
+    
+    
+    
     
     
     
@@ -78,6 +105,8 @@ class MessagesPageViewController: UIViewController,UITableViewDataSource,UITable
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        isSelected = false
 
         self.tableViewMessages.delegate = self
         self.tableViewMessages.dataSource = self
