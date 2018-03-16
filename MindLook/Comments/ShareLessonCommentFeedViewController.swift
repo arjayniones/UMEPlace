@@ -77,7 +77,7 @@ class ShareLessonCommentFeedViewController: UIViewController, UITableViewDataSou
             
             cell.viewMainCell.clipsToBounds = true
            
-            cell.lblNumber.text = "#\(indexPath.row)"
+            cell.lblNumber.text = "#\(indexPath.row + 1)"
             cell.lblContent.text = "I like your story"
             
             return cell

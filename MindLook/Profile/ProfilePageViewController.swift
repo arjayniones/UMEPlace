@@ -9,6 +9,9 @@
 import UIKit
 
 class ProfilePageViewController: UIViewController {
+    
+    
+    let darkBlue =  UIColor(red:0.04, green:0.36, blue:0.59, alpha:1.0)
 
     @IBOutlet weak var imgUser: UIImageView!
     
@@ -31,7 +34,11 @@ class ProfilePageViewController: UIViewController {
          self.imgUser.clipsToBounds = true;
         
         
+        self.btnMale.layer.borderWidth = 0.5
+        self.btnMale.layer.borderColor = UIColor.gray.cgColor
         
+        self.btnFemale.layer.borderWidth = 0.5
+        self.btnFemale.layer.borderColor = UIColor.gray.cgColor
         
         
         
@@ -42,15 +49,24 @@ class ProfilePageViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    @IBAction func btnMaleClicked(_ sender: Any) {
+        
+        self.btnMale.backgroundColor = darkBlue
+        self.btnMale.setTitleColor(UIColor.white, for: .normal)
+        
+        self.btnFemale.backgroundColor = UIColor.white
+        self.btnFemale.setTitleColor(darkBlue, for: .normal)
+        
+        
     }
-    */
-
+    
+    @IBAction func btnFemaleClicked(_ sender: Any) {
+        
+        self.btnFemale.backgroundColor = darkBlue
+        self.btnFemale.setTitleColor(UIColor.white, for: .normal)
+        
+        self.btnMale.backgroundColor = UIColor.white
+        self.btnMale.setTitleColor(darkBlue, for: .normal)
+    }
+    
 }

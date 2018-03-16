@@ -10,7 +10,7 @@ import UIKit
 
 class GiveFoodToSodaPageViewController: UIViewController {
 
-     let darkBlue = UIColor(red:0.22, green:0.42, blue:0.80, alpha:1.0)
+     let darkBlue = UIColor(red:0.09, green:0.42, blue:0.66, alpha:1.0)
     
     
     

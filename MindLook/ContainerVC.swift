@@ -141,7 +141,7 @@ class ContainerVC: UIViewController{
         
         if sideMenuOpen{
             sideMenuOpen = false
-            sideMenuConstraint.constant = -226
+            sideMenuConstraint.constant = -293 //-226
             
         }
         else{
@@ -158,7 +158,7 @@ class ContainerVC: UIViewController{
         
         if sideMenuOpen{
         sideMenuOpen = false
-        sideMenuConstraint.constant = -226
+        sideMenuConstraint.constant = -293 //-226
         
         UIView.animate(withDuration: 0.3){
             self.view.layoutIfNeeded()
@@ -269,7 +269,7 @@ class ContainerVC: UIViewController{
             }else {              //swipe left
                 
                 
-                if self.sideMenuConstraint.constant > -226 {
+                if self.sideMenuConstraint.constant > -293 {
                     
                     UIView.animate(withDuration: 0.2, animations: {
                         //                        self.sideMenuConstraint.constant += translation / 10
