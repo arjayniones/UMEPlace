@@ -189,11 +189,11 @@ open class CombinedChartView: BarLineChartViewBase, CombinedChartDataProvider
     {
         get
         {
-            return (renderer as! CombinedChartRenderer!).drawOrder.map { $0.rawValue }
+            return (renderer as! CombinedChartRenderer?)!.drawOrder.map { $0.rawValue }
         }
         set
         {
-            (renderer as! CombinedChartRenderer!).drawOrder = newValue.map { DrawOrder(rawValue: $0)! }
+            (renderer as! CombinedChartRenderer?)?.drawOrder = newValue.map { DrawOrder(rawValue: $0)! }
         }
     }
     

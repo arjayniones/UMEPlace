@@ -123,7 +123,7 @@ class HomePage1VC: UIViewController, ChartViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
+        self.getCurrentDate()
         
         self.posStatDate = ["03/01","03/02","03/03","03/04","03/05","03/06","03/07"]
         self.posStatPercentage = [50.0,40.0,55.0,30.0,70.0,65.0,25.0]
@@ -215,6 +215,32 @@ class HomePage1VC: UIViewController, ChartViewDelegate {
                 avPlayerController.player?.play()
                 //self.viewPlayer.addSubview(avPlayerController.view)
         }
+    }
+    
+    
+    
+    func getCurrentDate(){
+        
+//        let date = Date()
+//        let calendar = Calendar.current
+//        let components = calendar.dateComponents([.year, .month, .day], from: date)
+//
+//        let year =  components.year
+//        let month = components.month
+//        let day = components.day
+//
+//        self.lblDateTop.text = ""
+//        print(year)
+//        print(month)
+//        print(day)
+        
+        let currentDate = Date()
+        let dateFormatter = DateFormatter()
+        
+        dateFormatter.dateFormat = "EEEE, MMM d, yyyy hh:mm a"
+        let convertedDate: String = dateFormatter.string(from: currentDate)
+        
+        self.lblDateTop.text = convertedDate
     }
     
     func setDataCount(_ count: Int) {

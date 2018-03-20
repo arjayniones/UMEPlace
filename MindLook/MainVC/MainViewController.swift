@@ -1,37 +1,44 @@
 //
-//  MainVC.swift
-//  UMEPlace
+//  MainViewController.swift
+//  MindLook
 //
-//  Created by Arjay Niones on 6/2/18.
+//  Created by Arjay Niones on 16/3/18.
 //  Copyright © 2018 Arjay Niones. All rights reserved.
 //
 
 import UIKit
 
-class MainVC: UIViewController {
-    
+class MainViewController: UIViewController {
+
     
     @IBOutlet weak var mainContainerView: UIView!
     
     @IBOutlet weak var mainNavigationBarTitle: UINavigationItem!
     
+    @IBOutlet weak var viewBottomMenu: UIView!
+    
+    
+    @IBOutlet weak var containerBottomConstraints: NSLayoutConstraint!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        //self.showHome()
         
-    //custom navigation bar item size
+        //custom navigation bar item size
         
         let btnMenu = UIButton(type: .custom)
         btnMenu.setBackgroundImage(UIImage(named: "menu_list"), for: .normal)
-
-//        btnMenu.frame = CGRect(x: 0, y: 0, width: 20, height: 20)
-
+        
+        //        btnMenu.frame = CGRect(x: 0, y: 0, width: 20, height: 20)
+        
         // Usage
         btnMenu.applyNavBarConstraints(size: (width: 30, height: 30))
-
+        
         btnMenu.addTarget(self, action: #selector(onSideMenuTapped), for: .touchUpInside)
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: btnMenu)
-
+        
         
         
         let btnHome = UIButton(type: .custom)
@@ -41,10 +48,10 @@ class MainVC: UIViewController {
         
         //         btnHome.frame = CGRect(x: 0, y: 0, width: 20, height: 20)
         btnHome.setBackgroundImage(UIImage(named: "menu_home"), for: .normal)
-
+        
         btnHome.addTarget(self, action: #selector(MainVC.onHomeMenuTapped(_:)), for: .touchUpInside)
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: btnHome)
-
+        
         
         
         
@@ -95,10 +102,7 @@ class MainVC: UIViewController {
                                                name: Notification.Name("ShowAdvise"),
                                                object: nil )
         
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(showPopUp),
-                                               name: Notification.Name("ShowPopUp"),
-                                               object: nil )
+       
         
         
         //notifications for outside pages navigation
@@ -121,7 +125,7 @@ class MainVC: UIViewController {
                                                name: Notification.Name("ShowInputPageAskAdvise"),
                                                object: nil )
         
-       //ShareLessonDetailsView
+        //ShareLessonDetailsView
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(showShareLessonDetailsPage),
                                                name: Notification.Name("ShowShareLessonDetailsPage"),
@@ -129,11 +133,11 @@ class MainVC: UIViewController {
         
         //AdviceDetailsView
         NotificationCenter.default.addObserver(self,
-        selector: #selector(showAdviceDetailsPage),
-        name: Notification.Name("ShowAdviceDetailsPage"),
-        object: nil )
+                                               selector: #selector(showAdviceDetailsPage),
+                                               name: Notification.Name("ShowAdviceDetailsPage"),
+                                               object: nil )
         
-      
+        
         
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(showLessonCommentsPage),
@@ -161,7 +165,18 @@ class MainVC: UIViewController {
         
         //show bottom menu when home is loaded
         
-        NotificationCenter.default.post(name: NSNotification.Name("ShowBottomMenu"), object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(showBottomMenu),
+                                               name: Notification.Name("ShowBottomMenu"),
+                                               object: nil )
+        
+        //hide bottom menu
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(hideBottomMenu),
+                                               name: Notification.Name("HideBottomMenu"),
+                                               object: nil )
+        
+        
         
         
         //Side menu navigation
@@ -233,14 +248,26 @@ class MainVC: UIViewController {
     }
     
     
-
+    @objc func hideBottomMenu(){
+        
+        self.containerBottomConstraints.constant = 0
+        self.viewBottomMenu.isHidden = true
+    }
+    
+    @objc func showBottomMenu(){
+        
+        self.containerBottomConstraints.constant = 59
+        self.viewBottomMenu.isHidden = false
+    }
+    
+    
     
     //bottom and side menu actions
     
     @objc func showHome(){
         
-       
-//        NotificationCenter.default.post(name: NSNotification.Name("ToggleSideMenu"), object: nil)
+        
+        //        NotificationCenter.default.post(name: NSNotification.Name("ToggleSideMenu"), object: nil)
         
         NotificationCenter.default.post(name: NSNotification.Name("ShowBottomMenu"), object: nil)
         //performSegue(withIdentifier: "ShowChat", sender: nil)
@@ -265,10 +292,16 @@ class MainVC: UIViewController {
     
     
     
+    @IBAction func btnChatClicked(_ sender: Any) {
+        self.showChat()
+        
+    }
     
     
     @objc func showChat(){
         
+        
+        self.hideBottomMenu()
         //performSegue(withIdentifier: "ShowChat", sender: nil)
         self.mainNavigationBarTitle.title = "CHAT"
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
@@ -285,6 +318,11 @@ class MainVC: UIViewController {
         // tell the childviewcontroller it's contained in it's parent
         controller.didMove(toParentViewController: self)
     }
+    
+    @IBAction func btnMessageClicked(_ sender: Any) {
+        self.showMessages()
+    }
+    
     
     @objc func showMessages(){
         //performSegue(withIdentifier: "ShowMessages", sender: nil)
@@ -320,6 +358,12 @@ class MainVC: UIViewController {
         // tell the childviewcontroller it's contained in it's parent
         controller.didMove(toParentViewController: self)
     }
+    
+    @IBAction func btnLessonsClicked(_ sender: Any) {
+        self.showShareLearn()
+    }
+    
+    
     @objc func showShareLearn(){
         
         //performSegue(withIdentifier: "ShowShare", sender: nil)
@@ -341,6 +385,12 @@ class MainVC: UIViewController {
         controller.didMove(toParentViewController: self)
     }
     
+    
+    @IBAction func btnAdvicesClicked(_ sender: Any) {
+        self.showAdvise()
+    }
+    
+    
     @objc func showAdvise(){
         //performSegue(withIdentifier: "ShowLearnings", sender: nil)
         self.mainNavigationBarTitle.title = "ADVISES"
@@ -360,24 +410,28 @@ class MainVC: UIViewController {
         // tell the childviewcontroller it's contained in it's parent
         controller.didMove(toParentViewController: self)
     }
-    @objc func showPopUp(){
-        //performSegue(withIdentifier: "ShowAdvice", sender: nil)
-        
-       
-    }
-
-  @IBAction func onSideMenuTapped(){
-    print("Toggle Side Menu")
-    NotificationCenter.default.post(name: NSNotification.Name("ToggleSideMenu"), object: nil)
     
+    
+   
+    @IBAction func btnPopUpClicked(_ sender: Any) {
+        
+        NotificationCenter.default.post(name: NSNotification.Name("TogglePopUp"), object: nil)
+        
+    }
+    
+    @IBAction func onSideMenuTapped(){
+        print("Toggle Side Menu")
+        NotificationCenter.default.post(name: NSNotification.Name("ToggleSideMenu"), object: nil)
+        
     }
     
     @IBAction func onHomeMenuTapped(_ sender: Any) {
         
+        self.showBottomMenu()
         NotificationCenter.default.post(name: NSNotification.Name("ToggleSideMenuForHome"), object: nil)
         hideKeyboardWhenTappedAround()
         
-          NotificationCenter.default.post(name: NSNotification.Name("ShowBottomMenu"), object: nil)
+        NotificationCenter.default.post(name: NSNotification.Name("ShowBottomMenu"), object: nil)
         self.mainNavigationBarTitle.title = "HOME"
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
@@ -441,16 +495,16 @@ class MainVC: UIViewController {
     @objc func showInputPageShareLesson(){
         performSegue(withIdentifier: "ShowInputPageShareLesson", sender: nil)
         
-
+        
         self.navigationItem.setHidesBackButton(true, animated:true);
-         //self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        //self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
     }
     
     @objc func showInputPageAskAdvise(){
         performSegue(withIdentifier: "ShowInputPageAskAdvise", sender: nil)
         
         
-
+        
         self.navigationItem.setHidesBackButton(true, animated:true);
         //self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
     }
@@ -462,9 +516,9 @@ class MainVC: UIViewController {
         
         
         
-       
         
-         self.navigationItem.setHidesBackButton(true, animated:true);
+        
+        self.navigationItem.setHidesBackButton(true, animated:true);
         //self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
     }
     
@@ -789,13 +843,14 @@ class MainVC: UIViewController {
     
 }
 
-//extension UIView {
-//    func applyNavBarConstraints(size: (width: CGFloat, height: CGFloat)) {
-//        let widthConstraint = self.widthAnchor.constraint(equalToConstant: size.width)
-//        let heightConstraint = self.heightAnchor.constraint(equalToConstant: size.height)
-//        heightConstraint.isActive = true
-//        widthConstraint.isActive = true
-//    }
-//}
+extension UIView {
+    func applyNavBarConstraints(size: (width: CGFloat, height: CGFloat)) {
+        let widthConstraint = self.widthAnchor.constraint(equalToConstant: size.width)
+        let heightConstraint = self.heightAnchor.constraint(equalToConstant: size.height)
+        heightConstraint.isActive = true
+        widthConstraint.isActive = true
+    }
+}
+
 
 

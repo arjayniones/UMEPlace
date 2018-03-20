@@ -30,6 +30,21 @@ class ShareLessonInputPageViewController: UIViewController, UITextViewDelegate, 
     var selectedVerb = ""
     var selectedObject = ""
     
+    var isFeelGoodSelected = false
+    var isAmOKSelected = false
+    var isFeelBadSelected = false
+    var isAmNotOKSelected = false
+    
+    var isfeeling1Selected = false
+    var isfeeling2Selected = false
+    var isfeeling3Selected = false
+    var isfeeling4Selected = false
+    var isfeeling5Selected = false
+    var isfeeling6Selected = false
+    var isfeeling7Selected = false
+    var isfeeling8Selected = false
+    
+    
     var isPhysicalBodySelected = false
     var isMentalStateSelected = false
     var isSocialStatusSelected = false
@@ -38,6 +53,22 @@ class ShareLessonInputPageViewController: UIViewController, UITextViewDelegate, 
     var isMindsetSelected = false
     var isRelationshipSelected = false
     var isWayOfLifSelected = false
+    
+    var isVeryLowSelected = false
+    var isLowSelected = false
+    var isMediumSelected = false
+    var isHighSelected = false
+    var isVeryHighSelected = false
+    
+    var isW1Selected = false
+    var isW2Selected = false
+    var isL1Selected = false
+    var isL2Selected = false
+    var isA1Selected = false
+    var isA2Selected = false
+    
+    var isEveryoneSelected = false
+    var isNobodySelected = false
     
     var selectedEffectsOnMeValues = [String]()
     var valueToRemoveOnEffectsOnMe = [String]()
@@ -77,26 +108,44 @@ class ShareLessonInputPageViewController: UIViewController, UITextViewDelegate, 
     @IBOutlet weak var viewSympathized: UIView!
     @IBOutlet weak var btnSymphatized: UIButton!
     
+    @IBOutlet weak var lblFeeling1: UILabel!
+    
+    
     @IBOutlet weak var viewPleased: UIView!
     @IBOutlet weak var btnPleased: UIButton!
+    
+    @IBOutlet weak var lblFeeling2: UILabel!
     
     @IBOutlet weak var viewCalm: UIView!
     @IBOutlet weak var btnCalm: UIButton!
     
+    @IBOutlet weak var lblFeeling3: UILabel!
+    
     @IBOutlet weak var viewRelaxed: UIView!
     @IBOutlet weak var btnRelaxed: UIButton!
+    
+    @IBOutlet weak var lblFeeling4: UILabel!
     
     @IBOutlet weak var viewExcited: UIView!
     @IBOutlet weak var btnExcited: UIButton!
     
+    @IBOutlet weak var lblFeeling5: UILabel!
+    
     @IBOutlet weak var viewCheerful: UIView!
     @IBOutlet weak var btnCheerful: UIButton!
+    
+    @IBOutlet weak var lblFeeling6: UILabel!
     
     @IBOutlet weak var viewHappy: UIView!
     @IBOutlet weak var btnHappy: UIButton!
     
+    @IBOutlet weak var lblFeeling7: UILabel!
+    
+    
     @IBOutlet weak var viewInspired: UIView!
     @IBOutlet weak var btnInspired: UIButton!
+    
+    @IBOutlet weak var lblFeeling8: UILabel!
     
     @IBOutlet weak var txtOtherFeelings: UITextField!
     
@@ -133,6 +182,23 @@ class ShareLessonInputPageViewController: UIViewController, UITextViewDelegate, 
     @IBOutlet weak var btnWayOfLife: UIButton!
     
     @IBOutlet weak var lblRootCause: UILabel!
+    
+    @IBOutlet weak var btnVeryLow: UIButton!
+    
+    @IBOutlet weak var btnLow: UIButton!
+    
+    @IBOutlet weak var btnMedium: UIButton!
+    
+    @IBOutlet weak var btnHigh: UIButton!
+    
+    @IBOutlet weak var btnVeryHigh: UIButton!
+    
+    
+    
+    
+    
+    
+    
     
     @IBOutlet weak var lblWants: UILabel!
     
@@ -393,6 +459,23 @@ class ShareLessonInputPageViewController: UIViewController, UITextViewDelegate, 
         self.btnWayOfLife.clipsToBounds = true
         
         
+        //properties if Scale of Effects
+        
+        self.btnVeryLow.layer.borderColor = UIColor.gray.withAlphaComponent(0.5).cgColor
+        self.btnVeryLow.layer.borderWidth = 0.5
+        
+        self.btnLow.layer.borderColor = UIColor.gray.withAlphaComponent(0.5).cgColor
+        self.btnLow.layer.borderWidth = 0.5
+        
+        self.btnMedium.layer.borderColor = UIColor.gray.withAlphaComponent(0.5).cgColor
+        self.btnMedium.layer.borderWidth = 0.5
+        
+        self.btnHigh.layer.borderColor = UIColor.gray.withAlphaComponent(0.5).cgColor
+        self.btnHigh.layer.borderWidth = 0.5
+        
+        self.btnVeryHigh.layer.borderColor = UIColor.gray.withAlphaComponent(0.5).cgColor
+        self.btnVeryHigh.layer.borderWidth = 0.5
+        
         //Root Cause of My Status views properties round corner
         
         //viewWants
@@ -589,77 +672,178 @@ class ShareLessonInputPageViewController: UIViewController, UITextViewDelegate, 
     @IBAction func btnIFeelGoodClicked(_ sender: Any) {
         
         
-        btnFeelGood.backgroundColor = darkBlue
+        
+        
+        if isFeelGoodSelected == true{
+        btnFeelGood.backgroundColor = lightgray
         btnAmOK.backgroundColor = lightgray
         btnFeelBad.backgroundColor = lightgray
         btnNotOK.backgroundColor = lightgray
         
-        btnFeelGood.setTitleColor(UIColor.white, for: .normal)
+        btnFeelGood.setTitleColor(darkBlue, for: .normal)
         
         btnAmOK.setTitleColor(darkBlue, for: .normal)
-        
         btnFeelBad.setTitleColor(darkBlue, for: .normal)
         btnNotOK.setTitleColor(darkBlue, for: .normal)
         
-        selectedStatus = "I feel good"
+        selectedStatus = "-"
+            
+            
+            isFeelGoodSelected = false
+        }else{
+            btnFeelGood.backgroundColor = darkBlue
+            btnAmOK.backgroundColor = lightgray
+            btnFeelBad.backgroundColor = lightgray
+            btnNotOK.backgroundColor = lightgray
+            
+            btnFeelGood.setTitleColor(UIColor.white, for: .normal)
+            
+            btnAmOK.setTitleColor(darkBlue, for: .normal)
+            
+            btnFeelBad.setTitleColor(darkBlue, for: .normal)
+            btnNotOK.setTitleColor(darkBlue, for: .normal)
+            
+            selectedStatus = "I feel good"
+            
+        self.changeFeelingsPositive()
+            isFeelGoodSelected = true
+            isAmOKSelected = false
+            isFeelBadSelected = false
+            isAmNotOKSelected = false
+            
+        }
     }
     
     @IBAction func btnImOKClicked(_ sender: Any) {
         
+      
         
+        
+        if isAmOKSelected == true {
         btnFeelGood.backgroundColor = lightgray
-        btnAmOK.backgroundColor = darkBlue
+        btnAmOK.backgroundColor = lightgray
         btnFeelBad.backgroundColor = lightgray
         btnNotOK.backgroundColor = lightgray
         
         btnFeelGood.setTitleColor(darkBlue, for: .normal)
-        btnAmOK.setTitleColor(UIColor.white, for: .normal)
+        btnAmOK.setTitleColor(darkBlue, for: .normal)
         btnFeelBad.setTitleColor(darkBlue, for: .normal)
         btnNotOK.setTitleColor(darkBlue, for: .normal)
         
-        selectedStatus = "I am OK"
+        selectedStatus = "-"
+        isAmOKSelected = false
+        }else{
+            
+            btnFeelGood.backgroundColor = lightgray
+            btnAmOK.backgroundColor = darkBlue
+            btnFeelBad.backgroundColor = lightgray
+            btnNotOK.backgroundColor = lightgray
+            
+            btnFeelGood.setTitleColor(darkBlue, for: .normal)
+            btnAmOK.setTitleColor(UIColor.white, for: .normal)
+            btnFeelBad.setTitleColor(darkBlue, for: .normal)
+            btnNotOK.setTitleColor(darkBlue, for: .normal)
+            
+            selectedStatus = "I am OK"
+        self.changeFeelingsPositive()
+            isFeelGoodSelected = false
+            isAmOKSelected = true
+            isFeelBadSelected = false
+            isAmNotOKSelected = false
+            
+        }
     }
     
     @IBAction func btnFeelBadClicked(_ sender: Any) {
         
-        btnFeelGood.backgroundColor = lightgray
-        btnAmOK.backgroundColor = lightgray
-        btnFeelBad.backgroundColor = darkBlue
-        btnNotOK.backgroundColor = lightgray
+      
         
-        btnFeelGood.setTitleColor(darkBlue, for: .normal)
-        btnAmOK.setTitleColor(darkBlue, for: .normal)
-        btnFeelBad.setTitleColor(UIColor.white, for: .normal)
-        btnNotOK.setTitleColor(darkBlue, for: .normal)
-        
-        selectedStatus = "I feel bad"
-    }
-    
-    @IBAction func btnNotOKClicked(_ sender: Any) {
+        if isFeelBadSelected == true{
         
         btnFeelGood.backgroundColor = lightgray
         btnAmOK.backgroundColor = lightgray
         btnFeelBad.backgroundColor = lightgray
-        btnNotOK.backgroundColor = darkBlue
+        btnNotOK.backgroundColor = lightgray
         
         btnFeelGood.setTitleColor(darkBlue, for: .normal)
         btnAmOK.setTitleColor(darkBlue, for: .normal)
         btnFeelBad.setTitleColor(darkBlue, for: .normal)
-        btnNotOK.setTitleColor(UIColor.white, for: .normal)
+        btnNotOK.setTitleColor(darkBlue, for: .normal)
         
-        selectedStatus = "I am not OK"
+        selectedStatus = "-"
+          isFeelBadSelected = false
+        }else{
+            
+            btnFeelGood.backgroundColor = lightgray
+            btnAmOK.backgroundColor = lightgray
+            btnFeelBad.backgroundColor = darkBlue
+            btnNotOK.backgroundColor = lightgray
+            
+            btnFeelGood.setTitleColor(darkBlue, for: .normal)
+            btnAmOK.setTitleColor(darkBlue, for: .normal)
+            btnFeelBad.setTitleColor(UIColor.white, for: .normal)
+            btnNotOK.setTitleColor(darkBlue, for: .normal)
+            
+            selectedStatus = "I feel bad"
+            self.changeFeelingsNegative()
+            isFeelGoodSelected = false
+            isAmOKSelected = false
+            isFeelBadSelected = true
+            isAmNotOKSelected = false
+            
+        }
+    }
+    
+    @IBAction func btnNotOKClicked(_ sender: Any) {
+        
+      
+        
+        if isAmNotOKSelected == true {
+        btnFeelGood.backgroundColor = lightgray
+        btnAmOK.backgroundColor = lightgray
+        btnFeelBad.backgroundColor = lightgray
+        btnNotOK.backgroundColor = lightgray
+        
+        btnFeelGood.setTitleColor(darkBlue, for: .normal)
+        btnAmOK.setTitleColor(darkBlue, for: .normal)
+        btnFeelBad.setTitleColor(darkBlue, for: .normal)
+        btnNotOK.setTitleColor(darkBlue, for: .normal)
+        
+        selectedStatus = "-"
+         isAmNotOKSelected = false
+            
+        }else{
+            
+                btnFeelGood.backgroundColor = lightgray
+                btnAmOK.backgroundColor = lightgray
+                btnFeelBad.backgroundColor = lightgray
+                btnNotOK.backgroundColor = darkBlue
+                
+                btnFeelGood.setTitleColor(darkBlue, for: .normal)
+                btnAmOK.setTitleColor(darkBlue, for: .normal)
+                btnFeelBad.setTitleColor(darkBlue, for: .normal)
+                btnNotOK.setTitleColor(UIColor.white, for: .normal)
+                
+                selectedStatus = "I am not OK"
+            self.changeFeelingsNegative()
+            isFeelGoodSelected = false
+            isAmOKSelected = false
+            isFeelBadSelected = false
+            isAmNotOKSelected = true
+        }
     }
     
     //My Feelings and Emotions in My Story button functions
     
     @IBAction func btnSympathizedClicked(_ sender: Any) {
         
-        self.viewSympathized.layer.cornerRadius = 20
+        if isfeeling1Selected == true {
+         
+            self.viewSympathized.layer.cornerRadius = 0
+            self.viewSympathized.backgroundColor = UIColor.clear
         
-        self.viewSympathized.backgroundColor = darkBlue
-        self.viewSympathized.layer.borderColor = UIColor.white.withAlphaComponent(1).cgColor
-        self.viewSympathized.layer.borderWidth = 2
-        self.viewSympathized.clipsToBounds = true
+        self.viewSympathized.layer.borderWidth = 0
+        
         
         
         viewPleased.backgroundColor = UIColor.clear
@@ -683,17 +867,62 @@ class ShareLessonInputPageViewController: UIViewController, UITextViewDelegate, 
         viewInspired.backgroundColor = UIColor.clear
         viewInspired.layer.borderWidth = 0
         
-        selectedFeelings = "Sympathized"
+        selectedFeelings = "-"
+        isfeeling1Selected = false
+        }else{
+            
+            self.viewSympathized.layer.cornerRadius = 20
+            
+            self.viewSympathized.backgroundColor = darkBlue
+            self.viewSympathized.layer.borderColor = UIColor.white.withAlphaComponent(1).cgColor
+            self.viewSympathized.layer.borderWidth = 2
+            self.viewSympathized.clipsToBounds = true
+            
+            
+            viewPleased.backgroundColor = UIColor.clear
+            viewPleased.layer.borderWidth = 0
+            
+            viewCalm.backgroundColor = UIColor.clear
+            viewCalm.layer.borderWidth = 0
+            
+            viewRelaxed.backgroundColor = UIColor.clear
+            viewRelaxed.layer.borderWidth = 0
+            
+            viewExcited.backgroundColor = UIColor.clear
+            viewExcited.layer.borderWidth = 0
+            
+            viewCheerful.backgroundColor = UIColor.clear
+            viewCheerful.layer.borderWidth = 0
+            
+            viewHappy.backgroundColor = UIColor.clear
+            viewHappy.layer.borderWidth = 0
+            
+            viewInspired.backgroundColor = UIColor.clear
+            viewInspired.layer.borderWidth = 0
+            
+           
+            selectedFeelings = "Sympathized"
+            
+            isfeeling1Selected = true
+            isfeeling2Selected = false
+            isfeeling3Selected = false
+            isfeeling4Selected = false
+            isfeeling5Selected = false
+            isfeeling6Selected = false
+            isfeeling7Selected = false
+            isfeeling8Selected = false
+        }
     }
     
     @IBAction func btnPleasedClicked(_ sender: Any) {
         
-        self.viewPleased.layer.cornerRadius = 20
+        if isfeeling2Selected == true {
         
-        self.viewPleased.backgroundColor = darkBlue
-        self.viewPleased.layer.borderColor = UIColor.white.withAlphaComponent(1).cgColor
-        self.viewPleased.layer.borderWidth = 2
-        self.viewPleased.clipsToBounds = true
+        
+        self.viewPleased.backgroundColor = UIColor.clear
+        
+        self.viewPleased.layer.borderWidth = 0
+      
         
         
         viewSympathized.backgroundColor = UIColor.clear
@@ -716,17 +945,68 @@ class ShareLessonInputPageViewController: UIViewController, UITextViewDelegate, 
         
         viewInspired.backgroundColor = UIColor.clear
         viewInspired.layer.borderWidth = 0
-        selectedFeelings = "Pleased"
+        selectedFeelings = "-"
+            isfeeling2Selected = false
+            
+        }else{
+            
+         
+                self.viewPleased.layer.cornerRadius = 20
+                
+                self.viewPleased.backgroundColor = darkBlue
+                self.viewPleased.layer.borderColor = UIColor.white.withAlphaComponent(1).cgColor
+                self.viewPleased.layer.borderWidth = 2
+                self.viewPleased.clipsToBounds = true
+                
+                
+                viewSympathized.backgroundColor = UIColor.clear
+                viewSympathized.layer.borderWidth = 0
+                
+                viewCalm.backgroundColor = UIColor.clear
+                viewCalm.layer.borderWidth = 0
+                
+                viewRelaxed.backgroundColor = UIColor.clear
+                viewRelaxed.layer.borderWidth = 0
+                
+                viewExcited.backgroundColor = UIColor.clear
+                viewExcited.layer.borderWidth = 0
+                
+                viewCheerful.backgroundColor = UIColor.clear
+                viewCheerful.layer.borderWidth = 0
+                
+                viewHappy.backgroundColor = UIColor.clear
+                viewHappy.layer.borderWidth = 0
+                
+                viewInspired.backgroundColor = UIColor.clear
+                viewInspired.layer.borderWidth = 0
+               
+                selectedFeelings = "Pleased"
+                
+            isfeeling1Selected = false
+            isfeeling2Selected = true
+            isfeeling3Selected = false
+            isfeeling4Selected = false
+            isfeeling5Selected = false
+            isfeeling6Selected = false
+            isfeeling7Selected = false
+            isfeeling8Selected = false
+            
+            
+            
+        }
+            
     }
     
-    @IBAction func btnCalmClicked(_ sender: Any) {
+     @IBAction   func btnCalmClicked(_ sender: Any) {
+            
+            if isfeeling3Selected == true {
         
-        self.viewCalm.layer.cornerRadius = 20
+     
         
-        self.viewCalm.backgroundColor = darkBlue
-        self.viewCalm.layer.borderColor = UIColor.white.withAlphaComponent(1).cgColor
-        self.viewCalm.layer.borderWidth = 2
-        self.viewCalm.clipsToBounds = true
+        self.viewCalm.backgroundColor = UIColor.clear
+       
+        self.viewCalm.layer.borderWidth = 0
+       
         
         
         viewSympathized.backgroundColor = UIColor.clear
@@ -749,17 +1029,61 @@ class ShareLessonInputPageViewController: UIViewController, UITextViewDelegate, 
         
         viewInspired.backgroundColor = UIColor.clear
         viewInspired.layer.borderWidth = 0
-        selectedFeelings = "Calm"
+        selectedFeelings = "-"
+                
+                isfeeling3Selected = false
+            }else {
+                
+                self.viewCalm.layer.cornerRadius = 20
+                
+                self.viewCalm.backgroundColor = darkBlue
+                self.viewCalm.layer.borderColor = UIColor.white.withAlphaComponent(1).cgColor
+                self.viewCalm.layer.borderWidth = 2
+                self.viewCalm.clipsToBounds = true
+                
+                
+                viewSympathized.backgroundColor = UIColor.clear
+                viewSympathized.layer.borderWidth = 0
+                
+                viewPleased.backgroundColor = UIColor.clear
+                viewPleased.layer.borderWidth = 0
+                
+                viewRelaxed.backgroundColor = UIColor.clear
+                viewRelaxed.layer.borderWidth = 0
+                
+                viewExcited.backgroundColor = UIColor.clear
+                viewExcited.layer.borderWidth = 0
+                
+                viewCheerful.backgroundColor = UIColor.clear
+                viewCheerful.layer.borderWidth = 0
+                
+                viewHappy.backgroundColor = UIColor.clear
+                viewHappy.layer.borderWidth = 0
+                
+                viewInspired.backgroundColor = UIColor.clear
+                viewInspired.layer.borderWidth = 0
+                selectedFeelings = "Calm"
+                
+                isfeeling1Selected = false
+                isfeeling2Selected = false
+                isfeeling3Selected = true
+                isfeeling4Selected = false
+                isfeeling5Selected = false
+                isfeeling6Selected = false
+                isfeeling7Selected = false
+                isfeeling8Selected = false
+            }
     }
     
     @IBAction func btnRelaxedClicked(_ sender: Any) {
         
-        self.viewRelaxed.layer.cornerRadius = 20
+        if isfeeling4Selected == true {
+       
         
-        self.viewRelaxed.backgroundColor = darkBlue
-        self.viewRelaxed.layer.borderColor = UIColor.white.withAlphaComponent(1).cgColor
-        self.viewRelaxed.layer.borderWidth = 2
-        self.viewRelaxed.clipsToBounds = true
+        self.viewRelaxed.backgroundColor = UIColor.clear
+        
+        self.viewRelaxed.layer.borderWidth = 0
+       
         
         
         viewSympathized.backgroundColor = UIColor.clear
@@ -782,18 +1106,61 @@ class ShareLessonInputPageViewController: UIViewController, UITextViewDelegate, 
         
         viewInspired.backgroundColor = UIColor.clear
         viewInspired.layer.borderWidth = 0
-        selectedFeelings = "Relaxed"
+        selectedFeelings = "-"
+            
+            isfeeling4Selected = false
+        }else{
+            self.viewRelaxed.layer.cornerRadius = 20
+            
+            self.viewRelaxed.backgroundColor = darkBlue
+            self.viewRelaxed.layer.borderColor = UIColor.white.withAlphaComponent(1).cgColor
+            self.viewRelaxed.layer.borderWidth = 2
+            self.viewRelaxed.clipsToBounds = true
+            
+            
+            viewSympathized.backgroundColor = UIColor.clear
+            viewSympathized.layer.borderWidth = 0
+            
+            viewPleased.backgroundColor = UIColor.clear
+            viewPleased.layer.borderWidth = 0
+            
+            viewCalm.backgroundColor = UIColor.clear
+            viewCalm.layer.borderWidth = 0
+            
+            viewExcited.backgroundColor = UIColor.clear
+            viewExcited.layer.borderWidth = 0
+            
+            viewCheerful.backgroundColor = UIColor.clear
+            viewCheerful.layer.borderWidth = 0
+            
+            viewHappy.backgroundColor = UIColor.clear
+            viewHappy.layer.borderWidth = 0
+            
+            viewInspired.backgroundColor = UIColor.clear
+            viewInspired.layer.borderWidth = 0
+            selectedFeelings = "Relaxed"
+            
+            isfeeling1Selected = false
+            isfeeling2Selected = false
+            isfeeling3Selected = false
+            isfeeling4Selected = true
+            isfeeling5Selected = false
+            isfeeling6Selected = false
+            isfeeling7Selected = false
+            isfeeling8Selected = false
+        }
     }
     
     
     @IBAction func btnExcitedClicked(_ sender: Any) {
         
-        self.viewExcited.layer.cornerRadius = 20
+        if isfeeling5Selected == true {
         
-        self.viewExcited.backgroundColor = darkBlue
-        self.viewExcited.layer.borderColor = UIColor.white.withAlphaComponent(1).cgColor
-        self.viewExcited.layer.borderWidth = 2
-        self.viewExcited.clipsToBounds = true
+        
+        self.viewExcited.backgroundColor = UIColor.clear
+        
+        self.viewExcited.layer.borderWidth = 0
+       
         
         
         viewSympathized.backgroundColor = UIColor.clear
@@ -816,19 +1183,62 @@ class ShareLessonInputPageViewController: UIViewController, UITextViewDelegate, 
         
         viewInspired.backgroundColor = UIColor.clear
         viewInspired.layer.borderWidth = 0
-        selectedFeelings = "Excited"
+        selectedFeelings = "-"
+            
+            isfeeling5Selected = false
+        }else{
+            
+            self.viewExcited.layer.cornerRadius = 20
+            
+            self.viewExcited.backgroundColor = darkBlue
+            self.viewExcited.layer.borderColor = UIColor.white.withAlphaComponent(1).cgColor
+            self.viewExcited.layer.borderWidth = 2
+            self.viewExcited.clipsToBounds = true
+            
+            
+            viewSympathized.backgroundColor = UIColor.clear
+            viewSympathized.layer.borderWidth = 0
+            
+            viewPleased.backgroundColor = UIColor.clear
+            viewPleased.layer.borderWidth = 0
+            
+            viewCalm.backgroundColor = UIColor.clear
+            viewCalm.layer.borderWidth = 0
+            
+            viewRelaxed.backgroundColor = UIColor.clear
+            viewRelaxed.layer.borderWidth = 0
+            
+            viewCheerful.backgroundColor = UIColor.clear
+            viewCheerful.layer.borderWidth = 0
+            
+            viewHappy.backgroundColor = UIColor.clear
+            viewHappy.layer.borderWidth = 0
+            
+            viewInspired.backgroundColor = UIColor.clear
+            viewInspired.layer.borderWidth = 0
+            selectedFeelings = "Excited"
+            
+            isfeeling1Selected = false
+            isfeeling2Selected = false
+            isfeeling3Selected = false
+            isfeeling4Selected = false
+            isfeeling5Selected = true
+            isfeeling6Selected = false
+            isfeeling7Selected = false
+            isfeeling8Selected = false
+            
+            
+        }
     }
     
     @IBAction func btnCheerfulClicked(_ sender: Any) {
         
-        self.viewCheerful.layer.cornerRadius = 20
-        
-        self.viewCheerful.backgroundColor = darkBlue
-        self.viewCheerful.layer.borderColor = UIColor.white.withAlphaComponent(1).cgColor
-        self.viewCheerful.layer.borderWidth = 2
-        self.viewCheerful.clipsToBounds = true
-        
-        
+       
+        if isfeeling6Selected == true {
+            
+          self.viewCheerful.backgroundColor = UIColor.clear
+         self.viewCheerful.layer.borderWidth = 0
+       
         viewSympathized.backgroundColor = UIColor.clear
         viewSympathized.layer.borderWidth = 0
         
@@ -850,18 +1260,61 @@ class ShareLessonInputPageViewController: UIViewController, UITextViewDelegate, 
         viewInspired.backgroundColor = UIColor.clear
         viewInspired.layer.borderWidth = 0
         
-        selectedFeelings = "Cheerful"
+        selectedFeelings = "-"
+            isfeeling6Selected = false
+        }else{
+            
+            self.viewCheerful.layer.cornerRadius = 20
+            
+            self.viewCheerful.backgroundColor = darkBlue
+            self.viewCheerful.layer.borderColor = UIColor.white.withAlphaComponent(1).cgColor
+            self.viewCheerful.layer.borderWidth = 2
+            self.viewCheerful.clipsToBounds = true
+            
+            
+            viewSympathized.backgroundColor = UIColor.clear
+            viewSympathized.layer.borderWidth = 0
+            
+            viewPleased.backgroundColor = UIColor.clear
+            viewPleased.layer.borderWidth = 0
+            
+            viewCalm.backgroundColor = UIColor.clear
+            viewCalm.layer.borderWidth = 0
+            
+            viewRelaxed.backgroundColor = UIColor.clear
+            viewRelaxed.layer.borderWidth = 0
+            
+            viewExcited.backgroundColor = UIColor.clear
+            viewExcited.layer.borderWidth = 0
+            
+            viewHappy.backgroundColor = UIColor.clear
+            viewHappy.layer.borderWidth = 0
+            
+            viewInspired.backgroundColor = UIColor.clear
+            viewInspired.layer.borderWidth = 0
+            
+            selectedFeelings = "Cheerful"
+            isfeeling1Selected = false
+            isfeeling2Selected = false
+            isfeeling3Selected = false
+            isfeeling4Selected = false
+            isfeeling5Selected = false
+            isfeeling6Selected = true
+            isfeeling7Selected = false
+            isfeeling8Selected = false
+        }
     }
     
     @IBAction func btnHappyClicked(_ sender: Any) {
         
-        self.viewHappy.layer.cornerRadius = 20
+        if isfeeling7Selected == true {
         
-        self.viewHappy.backgroundColor = darkBlue
-        self.viewHappy.layer.borderColor = UIColor.white.withAlphaComponent(1).cgColor
-        self.viewHappy.layer.borderWidth = 2
-        self.viewHappy.clipsToBounds = true
         
+        self.viewHappy.backgroundColor = UIColor.clear
+            
+        
+        self.viewHappy.layer.borderWidth = 0
+       
         
         viewSympathized.backgroundColor = UIColor.clear
         viewSympathized.layer.borderWidth = 0
@@ -883,17 +1336,59 @@ class ShareLessonInputPageViewController: UIViewController, UITextViewDelegate, 
         
         viewInspired.backgroundColor = UIColor.clear
         viewInspired.layer.borderWidth = 0
-        selectedFeelings = "Happy"
+        selectedFeelings = "-"
+            isfeeling7Selected = false
+            
+        }else {
+           
+            self.viewHappy.layer.cornerRadius = 20
+            
+            self.viewHappy.backgroundColor = darkBlue
+            self.viewHappy.layer.borderColor = UIColor.white.withAlphaComponent(1).cgColor
+            self.viewHappy.layer.borderWidth = 2
+            self.viewHappy.clipsToBounds = true
+            
+            
+            viewSympathized.backgroundColor = UIColor.clear
+            viewSympathized.layer.borderWidth = 0
+            
+            viewPleased.backgroundColor = UIColor.clear
+            viewPleased.layer.borderWidth = 0
+            
+            viewCalm.backgroundColor = UIColor.clear
+            viewCalm.layer.borderWidth = 0
+            
+            viewRelaxed.backgroundColor = UIColor.clear
+            viewRelaxed.layer.borderWidth = 0
+            
+            viewExcited.backgroundColor = UIColor.clear
+            viewExcited.layer.borderWidth = 0
+            
+            viewCheerful.backgroundColor = UIColor.clear
+            viewCheerful.layer.borderWidth = 0
+            
+            viewInspired.backgroundColor = UIColor.clear
+            viewInspired.layer.borderWidth = 0
+            selectedFeelings = "Happy"
+            isfeeling1Selected = false
+            isfeeling2Selected = false
+            isfeeling3Selected = false
+            isfeeling4Selected = false
+            isfeeling5Selected = false
+            isfeeling6Selected = false
+            isfeeling7Selected = true
+            isfeeling8Selected = false
+            
+        }
     }
     
     @IBAction func btnInspiredClicked(_ sender: Any) {
         
-        self.viewInspired.layer.cornerRadius = 20
-        
-        self.viewInspired.backgroundColor = darkBlue
-        self.viewInspired.layer.borderColor = UIColor.white.withAlphaComponent(1).cgColor
-        self.viewInspired.layer.borderWidth = 2
-        self.viewInspired.clipsToBounds = true
+        if isfeeling8Selected == true {
+       
+        self.viewInspired.backgroundColor = UIColor.clear
+         self.viewInspired.layer.borderWidth = 0
+      
         
         
         viewSympathized.backgroundColor = UIColor.clear
@@ -916,7 +1411,42 @@ class ShareLessonInputPageViewController: UIViewController, UITextViewDelegate, 
         
         viewHappy.backgroundColor = UIColor.clear
         viewHappy.layer.borderWidth = 0
-        selectedFeelings = "Inspired"
+        //selectedFeelings = "Inspired"
+            isfeeling8Selected = false
+        }else{
+            
+            self.viewInspired.layer.cornerRadius = 20
+            
+            self.viewInspired.backgroundColor = darkBlue
+            self.viewInspired.layer.borderColor = UIColor.white.withAlphaComponent(1).cgColor
+            self.viewInspired.layer.borderWidth = 2
+            self.viewInspired.clipsToBounds = true
+            
+            
+            viewSympathized.backgroundColor = UIColor.clear
+            viewSympathized.layer.borderWidth = 0
+            
+            viewPleased.backgroundColor = UIColor.clear
+            viewPleased.layer.borderWidth = 0
+            
+            viewCalm.backgroundColor = UIColor.clear
+            viewCalm.layer.borderWidth = 0
+            
+            viewRelaxed.backgroundColor = UIColor.clear
+            viewRelaxed.layer.borderWidth = 0
+            
+            viewExcited.backgroundColor = UIColor.clear
+            viewExcited.layer.borderWidth = 0
+            
+            viewCheerful.backgroundColor = UIColor.clear
+            viewCheerful.layer.borderWidth = 0
+            
+            viewHappy.backgroundColor = UIColor.clear
+            viewHappy.layer.borderWidth = 0
+            //selectedFeelings = "Inspired"
+            isfeeling8Selected = true
+            
+        }
     }
     
     @IBAction func txtOtherFeelingsDidBegin(_ sender: UITextField) {
@@ -1214,9 +1744,11 @@ class ShareLessonInputPageViewController: UIViewController, UITextViewDelegate, 
     
     @IBAction func btnWants1Clicked(_ sender: UIButton) {
         
-        viewWants1.backgroundColor = darkBlue
-        imgWants1.image = UIImage(named: "w1_pressed")
-        lblW1Text.textColor = UIColor.white
+        if isW1Selected == true {
+        
+        viewWants1.backgroundColor = UIColor.lightGray
+        imgWants1.image = UIImage(named: "w1_normal")
+        lblW1Text.textColor = UIColor.darkGray
         
         viewWants2.backgroundColor = UIColor.lightGray
         imgWants2.image = UIImage(named: "w2_normal")
@@ -1238,18 +1770,58 @@ class ShareLessonInputPageViewController: UIViewController, UITextViewDelegate, 
         imgAcceptance2.image = UIImage(named: "a2_normal")
         lblA2Text.textColor = UIColor.darkGray
         
-        selectedRootCause = self.lblW1Text.text!
+        selectedRootCause = "-"
+            
+            isW1Selected = false
+        }else {
+            viewWants1.backgroundColor = darkBlue
+            imgWants1.image = UIImage(named: "w1_pressed")
+            lblW1Text.textColor = UIColor.white
+            
+            viewWants2.backgroundColor = UIColor.lightGray
+            imgWants2.image = UIImage(named: "w2_normal")
+            lblW2Text.textColor = UIColor.darkGray
+            
+            viewLikes1.backgroundColor = UIColor.lightGray
+            imgLikes1.image = UIImage(named: "l1_normal")
+            lblL1Text.textColor = UIColor.darkGray
+            
+            viewLikes2.backgroundColor = UIColor.lightGray
+            imgLikes2.image = UIImage(named: "l2_normal")
+            lblL2Text.textColor = UIColor.darkGray
+            
+            viewAcceptance1.backgroundColor = UIColor.lightGray
+            imgAcceptance1.image = UIImage(named: "a1_normal")
+            lblA1Text.textColor = UIColor.darkGray
+            
+            viewAcceptance2.backgroundColor = UIColor.lightGray
+            imgAcceptance2.image = UIImage(named: "a2_normal")
+            lblA2Text.textColor = UIColor.darkGray
+            
+            selectedRootCause = self.lblW1Text.text!
+            
+            isW1Selected = true
+            isW2Selected = false
+            isL1Selected = false
+            isL2Selected = false
+            isA1Selected = false
+            isA2Selected = false
+            
+            
+        }
     }
     
     @IBAction func btnWants2Clicked(_ sender: UIButton) {
+        
+        if isW2Selected == true {
         
         viewWants1.backgroundColor = UIColor.lightGray
         imgWants1.image = UIImage(named: "w1_normal")
         lblW1Text.textColor = UIColor.darkGray
         
-        viewWants2.backgroundColor = darkBlue
-        imgWants2.image = UIImage(named: "w2_pressed")
-        lblW2Text.textColor = UIColor.white
+        viewWants2.backgroundColor = UIColor.lightGray
+        imgWants2.image = UIImage(named: "w2_normal")
+        lblW2Text.textColor = UIColor.darkGray
         
         viewLikes1.backgroundColor = UIColor.lightGray
         imgLikes1.image = UIImage(named: "l1_normal")
@@ -1267,40 +1839,53 @@ class ShareLessonInputPageViewController: UIViewController, UITextViewDelegate, 
         imgAcceptance2.image = UIImage(named: "a2_normal")
         lblA2Text.textColor = UIColor.darkGray
         
-        selectedRootCause = self.lblW2Text.text!
+        selectedRootCause = "-"
+            
+            isW2Selected = false
+            
+        }else {
+          
+            viewWants1.backgroundColor = UIColor.lightGray
+            imgWants1.image = UIImage(named: "w1_normal")
+            lblW1Text.textColor = UIColor.darkGray
+            
+            viewWants2.backgroundColor = darkBlue
+            imgWants2.image = UIImage(named: "w2_pressed")
+            lblW2Text.textColor = UIColor.white
+            
+            viewLikes1.backgroundColor = UIColor.lightGray
+            imgLikes1.image = UIImage(named: "l1_normal")
+            lblL1Text.textColor = UIColor.darkGray
+            
+            viewLikes2.backgroundColor = UIColor.lightGray
+            imgLikes2.image = UIImage(named: "l2_normal")
+            lblL2Text.textColor = UIColor.darkGray
+            
+            viewAcceptance1.backgroundColor = UIColor.lightGray
+            imgAcceptance1.image = UIImage(named: "a1_normal")
+            lblA1Text.textColor = UIColor.darkGray
+            
+            viewAcceptance2.backgroundColor = UIColor.lightGray
+            imgAcceptance2.image = UIImage(named: "a2_normal")
+            lblA2Text.textColor = UIColor.darkGray
+            
+            selectedRootCause = self.lblW2Text.text!
+            
+            isW1Selected = false
+            isW2Selected = true
+            isL1Selected = false
+            isL2Selected = false
+            isA1Selected = false
+            isA2Selected = false
+            
+            
+        }
         
     }
     
     @IBAction func btnLikes1Clicked(_ sender: UIButton) {
         
-        viewWants1.backgroundColor = UIColor.lightGray
-        imgWants1.image = UIImage(named: "w1_normal")
-        lblW1Text.textColor = UIColor.darkGray
-        
-        viewWants2.backgroundColor = UIColor.lightGray
-        imgWants2.image = UIImage(named: "w2_normal")
-        lblW2Text.textColor = UIColor.darkGray
-        
-        viewLikes1.backgroundColor = darkBlue
-        imgLikes1.image = UIImage(named: "l1_pressed")
-        lblL1Text.textColor = UIColor.white
-        
-        viewLikes2.backgroundColor = UIColor.lightGray
-        imgLikes2.image = UIImage(named: "l2_normal")
-        lblL2Text.textColor = UIColor.darkGray
-        
-        viewAcceptance1.backgroundColor = UIColor.lightGray
-        imgAcceptance1.image = UIImage(named: "a1_normal")
-        lblA1Text.textColor = UIColor.darkGray
-        
-        viewAcceptance2.backgroundColor = UIColor.lightGray
-        imgAcceptance2.image = UIImage(named: "a2_normal")
-        lblA2Text.textColor = UIColor.darkGray
-        
-        selectedRootCause = self.lblL1Text.text!
-    }
-    
-    @IBAction func btnLikes2Clicked(_ sender: UIButton) {
+        if isL1Selected == true {
         
         viewWants1.backgroundColor = UIColor.lightGray
         imgWants1.image = UIImage(named: "w1_normal")
@@ -1314,9 +1899,80 @@ class ShareLessonInputPageViewController: UIViewController, UITextViewDelegate, 
         imgLikes1.image = UIImage(named: "l1_normal")
         lblL1Text.textColor = UIColor.darkGray
         
-        viewLikes2.backgroundColor = darkBlue
-        imgLikes2.image = UIImage(named: "l2_pressed")
-        lblL2Text.textColor = UIColor.white
+        viewLikes2.backgroundColor = UIColor.lightGray
+        imgLikes2.image = UIImage(named: "l2_normal")
+        lblL2Text.textColor = UIColor.darkGray
+        
+        viewAcceptance1.backgroundColor = UIColor.lightGray
+        imgAcceptance1.image = UIImage(named: "a1_normal")
+        lblA1Text.textColor = UIColor.darkGray
+        
+        viewAcceptance2.backgroundColor = UIColor.lightGray
+        imgAcceptance2.image = UIImage(named: "a2_normal")
+        lblA2Text.textColor = UIColor.darkGray
+        
+        selectedRootCause = "-"
+            
+            isL1Selected = false
+            
+        }else {
+          
+            viewWants1.backgroundColor = UIColor.lightGray
+            imgWants1.image = UIImage(named: "w1_normal")
+            lblW1Text.textColor = UIColor.darkGray
+            
+            viewWants2.backgroundColor = UIColor.lightGray
+            imgWants2.image = UIImage(named: "w2_normal")
+            lblW2Text.textColor = UIColor.darkGray
+            
+            viewLikes1.backgroundColor = darkBlue
+            imgLikes1.image = UIImage(named: "l1_pressed")
+            lblL1Text.textColor = UIColor.white
+            
+            viewLikes2.backgroundColor = UIColor.lightGray
+            imgLikes2.image = UIImage(named: "l2_normal")
+            lblL2Text.textColor = UIColor.darkGray
+            
+            viewAcceptance1.backgroundColor = UIColor.lightGray
+            imgAcceptance1.image = UIImage(named: "a1_normal")
+            lblA1Text.textColor = UIColor.darkGray
+            
+            viewAcceptance2.backgroundColor = UIColor.lightGray
+            imgAcceptance2.image = UIImage(named: "a2_normal")
+            lblA2Text.textColor = UIColor.darkGray
+            
+            selectedRootCause = self.lblL1Text.text!
+            
+            isW1Selected = false
+            isW2Selected = false
+            isL1Selected = true
+            isL2Selected = false
+            isA1Selected = false
+            isA2Selected = false
+            
+        }
+    }
+    
+    @IBAction func btnLikes2Clicked(_ sender: UIButton) {
+        
+        if isL2Selected == true {
+            
+        
+        viewWants1.backgroundColor = UIColor.lightGray
+        imgWants1.image = UIImage(named: "w1_normal")
+        lblW1Text.textColor = UIColor.darkGray
+        
+        viewWants2.backgroundColor = UIColor.lightGray
+        imgWants2.image = UIImage(named: "w2_normal")
+        lblW2Text.textColor = UIColor.darkGray
+        
+        viewLikes1.backgroundColor = UIColor.lightGray
+        imgLikes1.image = UIImage(named: "l1_normal")
+        lblL1Text.textColor = UIColor.darkGray
+        
+        viewLikes2.backgroundColor = UIColor.lightGray
+        imgLikes2.image = UIImage(named: "l2_normal")
+        lblL2Text.textColor = UIColor.darkGray
         
         viewAcceptance1.backgroundColor = UIColor.lightGray
         imgAcceptance1.image = UIImage(named: "a1_normal")
@@ -1327,39 +1983,50 @@ class ShareLessonInputPageViewController: UIViewController, UITextViewDelegate, 
         lblA2Text.textColor = UIColor.darkGray
         
         selectedRootCause = self.lblL2Text.text!
+            
+            isL2Selected = false
+            
+        }else {
+           
+            viewWants1.backgroundColor = UIColor.lightGray
+            imgWants1.image = UIImage(named: "w1_normal")
+            lblW1Text.textColor = UIColor.darkGray
+            
+            viewWants2.backgroundColor = UIColor.lightGray
+            imgWants2.image = UIImage(named: "w2_normal")
+            lblW2Text.textColor = UIColor.darkGray
+            
+            viewLikes1.backgroundColor = UIColor.lightGray
+            imgLikes1.image = UIImage(named: "l1_normal")
+            lblL1Text.textColor = UIColor.darkGray
+            
+            viewLikes2.backgroundColor = darkBlue
+            imgLikes2.image = UIImage(named: "l2_pressed")
+            lblL2Text.textColor = UIColor.white
+            
+            viewAcceptance1.backgroundColor = UIColor.lightGray
+            imgAcceptance1.image = UIImage(named: "a1_normal")
+            lblA1Text.textColor = UIColor.darkGray
+            
+            viewAcceptance2.backgroundColor = UIColor.lightGray
+            imgAcceptance2.image = UIImage(named: "a2_normal")
+            lblA2Text.textColor = UIColor.darkGray
+            
+            selectedRootCause = self.lblL2Text.text!
+            
+            isW1Selected = false
+            isW2Selected = false
+            isL1Selected = false
+            isL2Selected = true
+            isA1Selected = false
+            isA2Selected = false
+        }
     }
     
     
     @IBAction func btnAcceptance1Clicked(_ sender: UIButton) {
         
-        viewWants1.backgroundColor = UIColor.lightGray
-        imgWants1.image = UIImage(named: "w1_normal")
-        lblW1Text.textColor = UIColor.darkGray
-        
-        viewWants2.backgroundColor = UIColor.lightGray
-        imgWants2.image = UIImage(named: "w2_normal")
-        lblW2Text.textColor = UIColor.darkGray
-        
-        viewLikes1.backgroundColor = UIColor.lightGray
-        imgLikes1.image = UIImage(named: "l1_normal")
-        lblL1Text.textColor = UIColor.darkGray
-        
-        viewLikes2.backgroundColor = UIColor.lightGray
-        imgLikes2.image = UIImage(named: "l2_normal")
-        lblL2Text.textColor = UIColor.darkGray
-        
-        viewAcceptance1.backgroundColor = darkBlue
-        imgAcceptance1.image = UIImage(named: "a1_pressed")
-        lblA1Text.textColor = UIColor.white
-        
-        viewAcceptance2.backgroundColor = UIColor.lightGray
-        imgAcceptance2.image = UIImage(named: "a2_normal")
-        lblA2Text.textColor = UIColor.darkGray
-        
-        selectedRootCause = self.lblA1Text.text!
-    }
-    
-    @IBAction func btnAcceptance2Clicked(_ sender: UIButton) {
+        if isA1Selected == true {
         
         viewWants1.backgroundColor = UIColor.lightGray
         imgWants1.image = UIImage(named: "w1_normal")
@@ -1381,39 +2048,420 @@ class ShareLessonInputPageViewController: UIViewController, UITextViewDelegate, 
         imgAcceptance1.image = UIImage(named: "a1_normal")
         lblA1Text.textColor = UIColor.darkGray
         
-        viewAcceptance2.backgroundColor = darkBlue
-        imgAcceptance2.image = UIImage(named: "a2_pressed")
-        lblA2Text.textColor = UIColor.white
+        viewAcceptance2.backgroundColor = UIColor.lightGray
+        imgAcceptance2.image = UIImage(named: "a2_normal")
+        lblA2Text.textColor = UIColor.darkGray
+        
+        selectedRootCause = "-"
+            
+            isA1Selected = false
+            
+        }else {
+            
+            viewWants1.backgroundColor = UIColor.lightGray
+            imgWants1.image = UIImage(named: "w1_normal")
+            lblW1Text.textColor = UIColor.darkGray
+            
+            viewWants2.backgroundColor = UIColor.lightGray
+            imgWants2.image = UIImage(named: "w2_normal")
+            lblW2Text.textColor = UIColor.darkGray
+            
+            viewLikes1.backgroundColor = UIColor.lightGray
+            imgLikes1.image = UIImage(named: "l1_normal")
+            lblL1Text.textColor = UIColor.darkGray
+            
+            viewLikes2.backgroundColor = UIColor.lightGray
+            imgLikes2.image = UIImage(named: "l2_normal")
+            lblL2Text.textColor = UIColor.darkGray
+            
+            viewAcceptance1.backgroundColor = darkBlue
+            imgAcceptance1.image = UIImage(named: "a1_pressed")
+            lblA1Text.textColor = UIColor.white
+            
+            viewAcceptance2.backgroundColor = UIColor.lightGray
+            imgAcceptance2.image = UIImage(named: "a2_normal")
+            lblA2Text.textColor = UIColor.darkGray
+            
+            selectedRootCause = self.lblA1Text.text!
+            
+            isW1Selected = false
+            isW2Selected = false
+            isL1Selected = false
+            isL2Selected = false
+            isA1Selected = true
+            isA2Selected = false
+            
+        }
+    }
+    
+    @IBAction func btnAcceptance2Clicked(_ sender: UIButton) {
+        
+        if isA2Selected == true {
+        
+        viewWants1.backgroundColor = UIColor.lightGray
+        imgWants1.image = UIImage(named: "w1_normal")
+        lblW1Text.textColor = UIColor.darkGray
+        
+        viewWants2.backgroundColor = UIColor.lightGray
+        imgWants2.image = UIImage(named: "w2_normal")
+        lblW2Text.textColor = UIColor.darkGray
+        
+        viewLikes1.backgroundColor = UIColor.lightGray
+        imgLikes1.image = UIImage(named: "l1_normal")
+        lblL1Text.textColor = UIColor.darkGray
+        
+        viewLikes2.backgroundColor = UIColor.lightGray
+        imgLikes2.image = UIImage(named: "l2_normal")
+        lblL2Text.textColor = UIColor.darkGray
+        
+        viewAcceptance1.backgroundColor = UIColor.lightGray
+        imgAcceptance1.image = UIImage(named: "a1_normal")
+        lblA1Text.textColor = UIColor.darkGray
+        
+        viewAcceptance2.backgroundColor = UIColor.lightGray
+        imgAcceptance2.image = UIImage(named: "a2_normal")
+        lblA2Text.textColor = UIColor.darkGray
         
         selectedRootCause = self.lblA2Text.text!
+            
+            isA2Selected = false
+            
+        }else {
+            
+            viewWants1.backgroundColor = UIColor.lightGray
+            imgWants1.image = UIImage(named: "w1_normal")
+            lblW1Text.textColor = UIColor.darkGray
+            
+            viewWants2.backgroundColor = UIColor.lightGray
+            imgWants2.image = UIImage(named: "w2_normal")
+            lblW2Text.textColor = UIColor.darkGray
+            
+            viewLikes1.backgroundColor = UIColor.lightGray
+            imgLikes1.image = UIImage(named: "l1_normal")
+            lblL1Text.textColor = UIColor.darkGray
+            
+            viewLikes2.backgroundColor = UIColor.lightGray
+            imgLikes2.image = UIImage(named: "l2_normal")
+            lblL2Text.textColor = UIColor.darkGray
+            
+            viewAcceptance1.backgroundColor = UIColor.lightGray
+            imgAcceptance1.image = UIImage(named: "a1_normal")
+            lblA1Text.textColor = UIColor.darkGray
+            
+            viewAcceptance2.backgroundColor = darkBlue
+            imgAcceptance2.image = UIImage(named: "a2_pressed")
+            lblA2Text.textColor = UIColor.white
+            
+            selectedRootCause = self.lblA2Text.text!
+            
+            isW1Selected = false
+            isW2Selected = false
+            isL1Selected = false
+            isL2Selected = false
+            isA1Selected = false
+            isA2Selected = true
+            
+        }
     }
     
     @IBAction func btnEveryoneClicked(_ sender: Any) {
         
-        self.viewEveryone.backgroundColor = darkBlue
+        if isEveryoneSelected == true {
+        self.viewEveryone.backgroundColor = UIColor.lightGray
         
         self.viewNobody.backgroundColor = UIColor.lightGray
         
-        self.lblEveryone.textColor = UIColor.white
-        self.lblEveryoneContent.textColor = UIColor.white
+        self.lblEveryone.textColor = darkBlue
+        self.lblEveryoneContent.textColor = darkBlue
         
         self.lblNobody.textColor = darkBlue
         self.lblNobodyContent.textColor = darkBlue
+            
+            isEveryoneSelected = false
+            
+        }else {
+            
+            self.viewEveryone.backgroundColor = darkBlue
+            
+            self.viewNobody.backgroundColor = UIColor.lightGray
+            
+            self.lblEveryone.textColor = UIColor.white
+            self.lblEveryoneContent.textColor = UIColor.white
+            
+            self.lblNobody.textColor = darkBlue
+            self.lblNobodyContent.textColor = darkBlue
+            
+            isEveryoneSelected = true
+            isNobodySelected = false
+        }
         
     }
     
     @IBAction func btnNobodyClicked(_ sender: Any) {
         
-        self.viewNobody.backgroundColor = darkBlue
+        if isNobodySelected == true {
+        
+        self.viewNobody.backgroundColor = UIColor.lightGray
         
         self.viewEveryone.backgroundColor = UIColor.lightGray
         
-        self.lblNobody.textColor = UIColor.white
-        self.lblNobodyContent.textColor = UIColor.white
+        self.lblNobody.textColor = darkBlue
+        self.lblNobodyContent.textColor = darkBlue
         
         self.lblEveryone.textColor = darkBlue
         self.lblEveryoneContent.textColor = darkBlue
+            
+            isNobodySelected = false
+            
+        }else {
+          
+            self.viewNobody.backgroundColor = darkBlue
+            
+            self.viewEveryone.backgroundColor = UIColor.lightGray
+            
+            self.lblNobody.textColor = UIColor.white
+            self.lblNobodyContent.textColor = UIColor.white
+            
+            self.lblEveryone.textColor = darkBlue
+            self.lblEveryoneContent.textColor = darkBlue
+            
+            isNobodySelected = true
+            isEveryoneSelected = false
+            
+        }
     }
+    
+    @IBAction func btnVeryLowTapped(_ sender: Any) {
+        
+        if isVeryLowSelected == true {
+        
+        self.btnVeryLow.backgroundColor = UIColor.white
+        
+        self.btnLow.backgroundColor = UIColor.white
+        self.btnMedium.backgroundColor = UIColor.white
+        self.btnHigh.backgroundColor = UIColor.white
+        
+        self.btnVeryHigh.backgroundColor = UIColor.white
+            
+            isVeryLowSelected = false
+        }else{
+            
+            self.btnVeryLow.backgroundColor = darkBlue
+            
+            self.btnLow.backgroundColor = UIColor.white
+            self.btnMedium.backgroundColor = UIColor.white
+            self.btnHigh.backgroundColor = UIColor.white
+            
+            self.btnVeryHigh.backgroundColor = UIColor.white
+        isVeryLowSelected = true
+        isLowSelected = false
+        isMediumSelected = false
+        isHighSelected = false
+        isVeryHighSelected = false
+        }
+        
+    }
+    
+    @IBAction func btnLowTapped(_ sender: Any) {
+        
+        if isLowSelected == true {
+        
+        self.btnVeryLow.backgroundColor = UIColor.white
+        
+        self.btnLow.backgroundColor = UIColor.white
+        self.btnMedium.backgroundColor = UIColor.white
+        self.btnHigh.backgroundColor = UIColor.white
+        
+        self.btnVeryHigh.backgroundColor = UIColor.white
+            
+            isLowSelected = false
+        }else{
+            self.btnVeryLow.backgroundColor = UIColor.white
+            
+            self.btnLow.backgroundColor = darkBlue
+            self.btnMedium.backgroundColor = UIColor.white
+            self.btnHigh.backgroundColor = UIColor.white
+            
+            self.btnVeryHigh.backgroundColor = UIColor.white
+            
+            isVeryLowSelected = false
+            isLowSelected = true
+            isMediumSelected = false
+            isHighSelected = false
+            isVeryHighSelected = false
+        }
+    }
+    
+    @IBAction func btnMediumTapped(_ sender: Any) {
+        
+        if isMediumSelected == true {
+         
+        self.btnVeryLow.backgroundColor = UIColor.white
+        
+        self.btnLow.backgroundColor = UIColor.white
+        self.btnMedium.backgroundColor = UIColor.white
+        self.btnHigh.backgroundColor = UIColor.white
+        
+        self.btnVeryHigh.backgroundColor = UIColor.white
+            
+            isMediumSelected = false
+        }else{
+            self.btnVeryLow.backgroundColor = UIColor.white
+            
+            self.btnLow.backgroundColor = UIColor.white
+            self.btnMedium.backgroundColor = darkBlue
+            self.btnHigh.backgroundColor = UIColor.white
+            
+            self.btnVeryHigh.backgroundColor = UIColor.white
+            
+            isVeryLowSelected = false
+            isLowSelected = false
+            isMediumSelected = true
+            isHighSelected = false
+            isVeryHighSelected = false
+            
+        }
+    }
+    
+    
+    @IBAction func btnHighTapped(_ sender: Any) {
+        
+        if isHighSelected == true {
+        
+        self.btnVeryLow.backgroundColor = UIColor.white
+        
+        self.btnLow.backgroundColor = UIColor.white
+        self.btnMedium.backgroundColor = UIColor.white
+        self.btnHigh.backgroundColor = UIColor.white
+        
+        self.btnVeryHigh.backgroundColor = UIColor.white
+          
+            isHighSelected = false
+        }else {
+            self.btnVeryLow.backgroundColor = UIColor.white
+            
+            self.btnLow.backgroundColor = UIColor.white
+            self.btnMedium.backgroundColor = UIColor.white
+            self.btnHigh.backgroundColor = darkBlue
+            
+            self.btnVeryHigh.backgroundColor = UIColor.white
+            
+            isVeryLowSelected = false
+            isLowSelected = false
+            isMediumSelected = false
+            isHighSelected = true
+            isVeryHighSelected = false
+            
+        }
+    }
+    
+    @IBAction func btnVeryHighTapped(_ sender: Any) {
+        
+        if isVeryHighSelected == true {
+        self.btnVeryLow.backgroundColor = UIColor.white
+        
+        self.btnLow.backgroundColor = UIColor.white
+        self.btnMedium.backgroundColor = UIColor.white
+        self.btnHigh.backgroundColor = UIColor.white
+        
+        self.btnVeryHigh.backgroundColor = UIColor.white
+            
+            isVeryHighSelected = false
+        }else{
+            self.btnVeryLow.backgroundColor = UIColor.white
+            
+            self.btnLow.backgroundColor = UIColor.white
+            self.btnMedium.backgroundColor = UIColor.white
+            self.btnHigh.backgroundColor = UIColor.white
+            
+            self.btnVeryHigh.backgroundColor = darkBlue
+            
+            isVeryLowSelected = false
+            isLowSelected = false
+            isMediumSelected = false
+            isHighSelected = false
+            isVeryHighSelected = true
+            
+        }
+        
+    }
+    
+    func changeFeelingsPositive(){
+        
+        self.btnSymphatized.setImage(UIImage(named: "sympathized"), for: UIControlState.normal)
+        
+            self.lblFeeling1.text = "Sympathized"
+        
+        self.btnPleased.setImage(UIImage(named: "pleased"), for: UIControlState.normal)
+        
+            self.lblFeeling2.text = "Pleased"
+        
+        self.btnCalm.setImage(UIImage(named: "calm"), for: UIControlState.normal)
+        
+            self.lblFeeling3.text = "Calm"
+        
+        self.btnRelaxed.setImage(UIImage(named: "relaxed"), for: UIControlState.normal)
+        
+            self.lblFeeling4.text = "Relaxed"
+        
+        self.btnExcited.setImage(UIImage(named: "excited"), for: UIControlState.normal)
+        
+        self.lblFeeling5.text = "Excited"
+        
+        self.btnCheerful.setImage(UIImage(named: "cheerful"), for: UIControlState.normal)
+        
+        self.lblFeeling6.text = "Cheerful"
+        
+        self.btnHappy.setImage(UIImage(named: "happy"), for: UIControlState.normal)
+        
+        self.lblFeeling7.text = "Happy"
+        
+        self.btnInspired.setImage(UIImage(named: "inspired"), for: UIControlState.normal)
+        
+        self.lblFeeling8.text = "Inspired"
+        
+        
+        
+    }
+    
+    func changeFeelingsNegative(){
+        
+        self.btnSymphatized.setImage(UIImage(named: "angry"), for: UIControlState.normal)
+        
+        self.lblFeeling1.text = "Angry"
+        
+        self.btnPleased.setImage(UIImage(named: "annoyed"), for: UIControlState.normal)
+        
+        self.lblFeeling2.text = "Annoyed"
+        
+        self.btnCalm.setImage(UIImage(named: "worried"), for: UIControlState.normal)
+        
+        self.lblFeeling3.text = "Worried"
+        
+        self.btnRelaxed.setImage(UIImage(named: "stressed"), for: UIControlState.normal)
+        
+        self.lblFeeling4.text = "Stressed"
+        
+        self.btnExcited.setImage(UIImage(named: "bored"), for: UIControlState.normal)
+        
+        self.lblFeeling5.text = "Bored"
+        
+        self.btnCheerful.setImage(UIImage(named: "lonely"), for: UIControlState.normal)
+        
+        self.lblFeeling6.text = "Lonely"
+        
+        self.btnHappy.setImage(UIImage(named: "sad"), for: UIControlState.normal)
+        
+        self.lblFeeling7.text = "Sad"
+        
+        self.btnInspired.setImage(UIImage(named: "depressed"), for: UIControlState.normal)
+        
+        self.lblFeeling8.text = "Depressed"
+        
+    }
+    
+    
+    
     
     
 }
