@@ -377,22 +377,24 @@ class MainVC: UIViewController {
         NotificationCenter.default.post(name: NSNotification.Name("ToggleSideMenuForHome"), object: nil)
         hideKeyboardWhenTappedAround()
         
-          NotificationCenter.default.post(name: NSNotification.Name("ShowBottomMenu"), object: nil)
-        self.mainNavigationBarTitle.title = "HOME"
+        self.showHome()
         
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let controller: UIViewController = storyboard.instantiateViewController(withIdentifier: "homePage") as! MainHomePageVC
-        
-        //add as a childviewcontroller
-        addChildViewController(controller)
-        
-        // Add the child's View as a subview
-        self.mainContainerView.addSubview(controller.view)
-        controller.view.frame = view.bounds
-        controller.view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        
-        // tell the childviewcontroller it's contained in it's parent
-        controller.didMove(toParentViewController: self)
+//          NotificationCenter.default.post(name: NSNotification.Name("ShowBottomMenu"), object: nil)
+//        self.mainNavigationBarTitle.title = "HOME"
+//
+//        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+//        let controller: UIViewController = storyboard.instantiateViewController(withIdentifier: "homePage") as! MainHomePageVC
+//
+//        //add as a childviewcontroller
+//        addChildViewController(controller)
+//
+//        // Add the child's View as a subview
+//        self.mainContainerView.addSubview(controller.view)
+//        controller.view.frame = view.bounds
+//        controller.view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+//
+//        // tell the childviewcontroller it's contained in it's parent
+//        controller.didMove(toParentViewController: self)
     }
     
     @objc func showPositivePage(){
@@ -734,6 +736,8 @@ class MainVC: UIViewController {
     
     
     @objc func showProfile(){
+        
+        
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let controller: UIViewController = storyboard.instantiateViewController(withIdentifier: "ProfilePage") as! ProfilePageViewController

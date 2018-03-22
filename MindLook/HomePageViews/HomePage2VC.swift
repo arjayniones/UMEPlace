@@ -26,6 +26,7 @@ class HomePage2VC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        
         self.viewAdvice1.layer.cornerRadius = 10
         self.viewAdvice1.layer.borderColor = darkBlue.withAlphaComponent(1).cgColor
         self.viewAdvice1.layer.borderWidth = 5

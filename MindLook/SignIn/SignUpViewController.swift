@@ -7,11 +7,19 @@
 //
 
 import UIKit
+import CoreData
 
-class SignUpViewController: UIViewController {
 
+class SignUpViewController: UIViewController, NSFetchedResultsControllerDelegate {
+
+    var userID = ""
+    var email = ""
+    var password = ""
+    var update = ""
+    var inactive = 0
+    var activatecode = ""
     
-    
+     let managedContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     @IBOutlet weak var txtEmail: UITextField!
     
@@ -36,39 +44,7 @@ class SignUpViewController: UIViewController {
 
     @IBAction func btnSignUpClicked(_ sender: Any) {
         //POST Request
-        //let parameters = ["email": "\(String(describing: self.txtEmail.text))", "password": "\(String(describing: self.txtPassword.text))"]
-        
-        //let parameters = ["email": "arjayniones@gmail.com", "password": "Password18"]
-        
-        //let parameters = "email=\(String(describing: self.txtEmail.text))&password=\(String(describing: self.txtPassword.text))"
-        
-//        guard let url = URL(string: "http://s2app.com/Signup?") else { return }
-//
-//        var request = URLRequest(url: url)
-//        //request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
-//        request.httpMethod = "POST"
-//        let postString = "email=arjayniones@gmail.com&password=Test"
-//
-//        request.httpBody = postString.data(using: .utf8)
-//        let task = URLSession.shared.dataTask(with: request) { data, response, error in
-//            guard let data = data, error == nil else {                                                 // check for fundamental networking error
-//                print("error=\(String(describing: error))")
-//                return
-//            }
-//
-//            if let httpStatus = response as? HTTPURLResponse, httpStatus.statusCode != 200 {           // check for http errors
-//                print("statusCode should be 200, but is \(httpStatus.statusCode)")
-//                print("response = \(String(describing: response))")
-//            }
-//
-//            let responseString = String(data: data, encoding: .utf8)
-//            print("responseString = \(String(describing: responseString))")
-//        }
-//        task.resume()
-        
-        
-        
-        //let myUrl = URL(string: "http://www.s2app.com/Signup?");
+       
          let myUrl = URL(string: "http://103.86.48.128/Signup?");
         
         var request = URLRequest(url:myUrl!)
@@ -92,21 +68,50 @@ class SignUpViewController: UIViewController {
             
             //Let's convert response sent from a server side script to a NSDictionary object:
             do {
-                let json = try JSONSerialization.jsonObject(with: data!) as! Array<Any>
+                let json = try JSONSerialization.jsonObject(with: data!) as! [Any]
                 
                 print("This is the JSON Data: \(json)")
                 
-//                if let parseJSON = json {
-//                    
-//                    // Now we can access value of First Name by its key
-//                    
-//                     print("JSON Data: \(parseJSON)")
-//                    let emailValue = parseJSON["email"] as? String
-//                    print("Email: \(emailValue)")
-//                    let passwordValue = parseJSON["password"] as? String
-//                    print("Password: \(passwordValue)")
-//                    
-//                }
+                OperationQueue.main.addOperation({
+                    
+                    if json.count != 0 {
+                        
+                        if let data = json[0] as? [String:Any] {
+                      
+                             let userInfo: User = NSEntityDescription.insertNewObject(forEntityName: "User", into: self.managedContext) as! User
+                            
+                            userInfo.userid = String(data["userid"] as? String ?? "default")
+                            userInfo.email = String(data["email"] as? String ?? "default")
+                            userInfo.password = String(data["password"] as? String ?? "default")
+                            userInfo.update = String(data["update"] as? String ?? "default")
+                            
+                            userInfo.inactive = Int32(data["inactive"] as? Int ?? 0)
+                            
+                            userInfo.activatecode = String(data["activatecode"] as? String ?? "default")
+                            
+                           
+                            let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+                            let nextViewController = storyBoard.instantiateViewController(withIdentifier: "ValidationPage") as! ValidationPageViewController
+                            
+                            
+                            nextViewController.passedUserID = userInfo.userid!
+                            
+                            nextViewController.passedUserActCode = userInfo.activatecode!
+                      
+                            
+                            //self.navigationController?.present(nextViewController, animated: true)
+                            
+                            self.navigationController?.pushViewController(nextViewController,
+                                                                                    animated: true)
+                            
+                            print("JSON Data \n UserID : \(String(describing: userInfo.userid)) \n Email : \(String(describing: userInfo.email)) \n Password : \(String(describing: userInfo.password)) \n Update : \(String(describing: userInfo.update)) \n Inactive : \(userInfo.inactive) \n Activation Code : \(String(describing: userInfo.activatecode))")
+                        }
+                    }
+                    
+                })
+                
+                
+                
             } catch {
                 print(error)
                 
@@ -117,9 +122,48 @@ class SignUpViewController: UIViewController {
         
       
     }
-        
-        
     
+    
+    
+    @IBAction func btnCancelTapped(_ sender: Any) {
+        
+        self.dismiss(animated: true, completion: nil)
+        
+    }
+    
+    
+        
+//    @IBAction func btnSignUpTapped(_ sender: Any) {
+//         let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "User")
+//        
+//        
+//        do {
+//            let eachUser = try self.managedContext.fetch(fetchRequest)
+//            
+//            
+//            
+//            
+//            //print(eachFeed[0].value(forKeyPath: "imageID") as! Int32)
+//            let userID = Int(eachUser[0].value(forKeyPath: "userid") as! String)
+//            print("Selected imageID : \(userID)")
+//            
+//            
+//            let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+//            let nextViewController = storyBoard.instantiateViewController(withIdentifier: "ValidationPage") as! ValidationPageViewController
+//            
+//            
+//            nextViewController.passedReviewID = reviewID
+//            //self.present(nextViewController, animated:true, completion:nil)
+//            
+//            self.navigationController?.pushViewController(nextViewController, animated: true)
+//            
+//            
+//        } catch let error as NSError {
+//            print("Could not get product detail. \(error)")
+//        }
+//
+//    }
+//    
     
     
     

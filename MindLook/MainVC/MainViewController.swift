@@ -24,7 +24,7 @@ class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //self.showHome()
+        self.showHome()
         
         //custom navigation bar item size
         
@@ -269,8 +269,11 @@ class MainViewController: UIViewController {
         
         //        NotificationCenter.default.post(name: NSNotification.Name("ToggleSideMenu"), object: nil)
         
-        NotificationCenter.default.post(name: NSNotification.Name("ShowBottomMenu"), object: nil)
+       //NotificationCenter.default.post(name: NSNotification.Name("ShowBottomMenu"), object: nil)
         //performSegue(withIdentifier: "ShowChat", sender: nil)
+        
+        self.showBottomMenu()
+        
         self.mainNavigationBarTitle.title = "HOME"
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let controller: UIViewController = storyboard.instantiateViewController(withIdentifier: "homePage") as! MainHomePageVC
@@ -428,25 +431,12 @@ class MainViewController: UIViewController {
     @IBAction func onHomeMenuTapped(_ sender: Any) {
         
         self.showBottomMenu()
+        self.showHome()
+        
         NotificationCenter.default.post(name: NSNotification.Name("ToggleSideMenuForHome"), object: nil)
         hideKeyboardWhenTappedAround()
         
-        NotificationCenter.default.post(name: NSNotification.Name("ShowBottomMenu"), object: nil)
-        self.mainNavigationBarTitle.title = "HOME"
-        
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let controller: UIViewController = storyboard.instantiateViewController(withIdentifier: "homePage") as! MainHomePageVC
-        
-        //add as a childviewcontroller
-        addChildViewController(controller)
-        
-        // Add the child's View as a subview
-        self.mainContainerView.addSubview(controller.view)
-        controller.view.frame = view.bounds
-        controller.view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        
-        // tell the childviewcontroller it's contained in it's parent
-        controller.didMove(toParentViewController: self)
+    
     }
     
     @objc func showPositivePage(){
@@ -789,23 +779,29 @@ class MainViewController: UIViewController {
     
     @objc func showProfile(){
         
+        self.hideBottomMenu()
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let controller: UIViewController = storyboard.instantiateViewController(withIdentifier: "ProfilePage") as! ProfilePageViewController
         
+        
+        //self.navigationController?.present(controller, animated: true)
+        
+        self.navigationController?.pushViewController(controller,animated: true)
+        
         //add as a childviewcontroller
-        addChildViewController(controller)
+        //addChildViewController(controller)
         
         // Add the child's View as a subview
-        self.mainContainerView.addSubview(controller.view)
-        controller.view.frame = view.bounds
-        controller.view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        //self.mainContainerView.addSubview(controller.view)
+        //controller.view.frame = view.bounds
+        //controller.view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         
         // tell the childviewcontroller it's contained in it's parent
-        controller.didMove(toParentViewController: self)
+        //controller.didMove(toParentViewController: self)
         
         
         
-        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        //self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         
         
         
@@ -814,23 +810,27 @@ class MainViewController: UIViewController {
     
     @objc func showSettings(){
         
+        self.hideBottomMenu()
+        
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let controller: UIViewController = storyboard.instantiateViewController(withIdentifier: "AccountPage") as! AccountPageViewController
         
+        self.navigationController?.pushViewController(controller,animated: true)
+        
         //add as a childviewcontroller
-        addChildViewController(controller)
+        //addChildViewController(controller)
         
         // Add the child's View as a subview
-        self.mainContainerView.addSubview(controller.view)
-        controller.view.frame = view.bounds
-        controller.view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        //self.mainContainerView.addSubview(controller.view)
+       // controller.view.frame = view.bounds
+        //controller.view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         
         // tell the childviewcontroller it's contained in it's parent
-        controller.didMove(toParentViewController: self)
+        //controller.didMove(toParentViewController: self)
         
         
         
-        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        //self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         
         
         

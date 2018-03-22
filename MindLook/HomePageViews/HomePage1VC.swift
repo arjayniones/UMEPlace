@@ -123,6 +123,9 @@ class HomePage1VC: UIViewController, ChartViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+   
+      
+        
         self.getCurrentDate()
         
         self.posStatDate = ["03/01","03/02","03/03","03/04","03/05","03/06","03/07"]

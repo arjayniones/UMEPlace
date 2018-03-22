@@ -121,6 +121,7 @@ class MainContainerViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+         self.view.transform = CGAffineTransform(scaleX: 2.0, y: 2.0)
         
         self.isYellowPopUpShown = false
         self.viewYellowPopUp.isHidden = true

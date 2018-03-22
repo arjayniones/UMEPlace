@@ -69,4 +69,10 @@ class ProfilePageViewController: UIViewController {
         self.btnMale.setTitleColor(darkBlue, for: .normal)
     }
     
+    
+    @IBAction func btnCancelTapped(_ sender: Any) {
+        
+         _ = navigationController?.popViewController(animated: true)
+    }
+    
 }

@@ -13,7 +13,11 @@ class SignInPageViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+       
+        
+        
+        
+        self.view.transform = CGAffineTransform(scaleX: 2.0, y: 2.0)
     }
 
     override func didReceiveMemoryWarning() {
@@ -22,14 +26,17 @@ class SignInPageViewController: UIViewController {
     }
     
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    @IBAction func btnSignInTapped(_ sender: Any) {
+        
+        
+        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+        let nextViewController = storyBoard.instantiateViewController(withIdentifier: "MainPage") as! MainContainerViewController
+        
+        self.navigationController?.present(nextViewController, animated: true)
+        
+        //self.navigationController?.pushViewController(nextViewController,animated: true)
     }
-    */
+    
+    
 
 }
