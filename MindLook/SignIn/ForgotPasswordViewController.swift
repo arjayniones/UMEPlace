@@ -31,90 +31,93 @@ class ForgotPasswordViewController: UIViewController {
 
     @IBAction func btnSubmitTapped(_ sender: Any) {
         
-//        let myUrl = URL(string: "http://103.86.48.128/ForgotPassword/getnewpassword?");
-//        
-//        var request = URLRequest(url:myUrl!)
-//        
-//        request.httpMethod = "POST"// Compose a query string
-//        
-//        let postString = "email=\( self.txtEmail.text)";
-//        
-//        request.httpBody = postString.data(using: String.Encoding.utf8);
-//        
-//        let task = URLSession.shared.dataTask(with: request) { (data: Data?, response: URLResponse?, error: Error?) in
-//            
-//            if error != nil
-//            {
-//                print("error=\(error)")
-//                return
-//            }
-//            
-//            // You can print out response object
-//            print("response = \(response)")
-//            
-//            //Let's convert response sent from a server side script to a NSDictionary object:
-//            do {
-//                
-//                
-//                print("This is the JSON Data: \(data)")
-//                
-//                OperationQueue.main.addOperation({
-//                    
-//                    if data != 0 {
-//                        
-//                      
-//                                
-//                                let alert = UIAlertController(title: "Success!!!", message: "Your new password has been sent to you email.", preferredStyle: UIAlertControllerStyle.alert)
-//                                alert.addAction(UIAlertAction(title: "Continue", style: UIAlertActionStyle.default, handler:   { action in
-//                                    
-//                                    // do something like...
-//                                    //self.gotoSignIn()
-//                                    
-//                                }))
-//                                
-//                                self.present(alert, animated: true, completion: nil)
-//                                
-//                                
-//                            }else{
-//                                
-//                                
-//                                
-//                                let alert = UIAlertController(title: "Not Existing!!!", message: "Your email is not yet registered.", preferredStyle: UIAlertControllerStyle.alert)
-//                                alert.addAction(UIAlertAction(title: "Register", style: UIAlertActionStyle.default, handler:   { action in
-//                                    
-//                                    // do something like...
-//                                    //self.gotoSignUp()
-//                                    
-//                                }))
-//                                
-//                                alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.default, handler:   { action in
-//                                    
-//                                    // do something like...
-//                                    //self.gotoSignUp()
-//                                    
-//                                }))
-//                                
-//                                self.present(alert, animated: true, completion: nil)
-//                                
-//                            
-//                            
-//                            }
-//                           
-//                    
-//                
-//                    
-//                })
-//                
-//                
-//                
-//            } catch {
-//                print(error)
-//                
-//                
-//            }
-//        }
-//        task.resume()
-//        
+        let myUrl = URL(string: "http://103.86.48.128/ForgotPassword/getnewpassword?");
+        
+        var request = URLRequest(url:myUrl!)
+        
+        request.httpMethod = "POST"// Compose a query string
+        
+        let postString = "email=\(self.txtEmail.text!)";
+        
+        request.httpBody = postString.data(using: String.Encoding.utf8);
+        
+        let task = URLSession.shared.dataTask(with: request) { (data: Data?, response: URLResponse?, error: Error?) in
+            
+            if error != nil
+            {
+                print("error=\(error)")
+                return
+            }
+            
+            // You can print out response object
+            print("response = \(response)")
+            
+            //Let's convert response sent from a server side script to a NSDictionary object:
+            do {
+                
+                
+               
+                
+                OperationQueue.main.addOperation({
+                    
+                    let result = String(data: data!, encoding: .utf8)
+                    
+                     print("This is the JSON Data: \(result)")
+                    if result == "1" {
+                        
+                      
+                        
+                                let alert = UIAlertController(title: "Success!!!", message: "Sign In successfully.", preferredStyle: UIAlertControllerStyle.alert)
+                                alert.addAction(UIAlertAction(title: "Continue", style: UIAlertActionStyle.default, handler:   { action in
+                                    
+                                    // do something like...
+                                    //self.gotoSignIn()
+                                    self.dismiss(animated: true, completion: nil)
+                                }))
+                        
+                                self.present(alert, animated: true, completion: nil)
+                        
+                        
+                            }else if result == "0"{
+                        
+                        
+                        
+                                let alert = UIAlertController(title: "Not Existing!!!", message: "Your email is not yet registered.", preferredStyle: UIAlertControllerStyle.alert)
+                                alert.addAction(UIAlertAction(title: "Register", style: UIAlertActionStyle.default, handler:   { action in
+                                    
+                                    // do something like...
+                                    self.gotoSignUp()
+                                    
+                                }))
+                        
+                                alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.default, handler:   { action in
+                                    
+                                    // do something like...
+                                    //self.gotoSignUp()
+                                    
+                                }))
+                        
+                                self.present(alert, animated: true, completion: nil)
+                        
+                        
+                        
+                            }
+                    
+                    
+                
+                    
+                })
+                
+                
+                
+            } catch {
+                print(error)
+                
+                
+            }
+        }
+        task.resume()
+        
         
     }
     
@@ -134,12 +137,15 @@ class ForgotPasswordViewController: UIViewController {
         let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
         let nextViewController = storyBoard.instantiateViewController(withIdentifier: "SignUpPage") as! SignUpViewController
         
-        
-        
-        
-        self.navigationController?.present(nextViewController, animated: true)
+        self.navigationController?.pushViewController(nextViewController, animated: true)
         
     }
+    
+    
+    @IBAction func btnCancelTapped(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
     
 
 }

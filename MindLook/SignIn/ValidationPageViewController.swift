@@ -84,5 +84,11 @@ class ValidationPageViewController: UIViewController {
         //self.navigationController?.pushViewController(nextViewController,animated: true)
     }
     
+    
+    @IBAction func btnCancelTapped(_ sender: Any) {
+        
+        self.dismiss(animated: true, completion: nil)
+    }
+    
 
 }
