@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class MainContainerViewController: UIViewController {
 
@@ -121,7 +122,48 @@ class MainContainerViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-         self.view.transform = CGAffineTransform(scaleX: 2.0, y: 2.0)
+//        let managedContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+//        
+//        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "User")
+//        do{
+//            let eachUser = try managedContext.fetch(fetchRequest)
+//        if (UserDefaults.standard.object(forKey: "userid") != nil && eachUser.count > 0) {
+//            
+//            UserDefaults.standard.setValue(eachUser[0].value(forKey: "userid"), forKey: "userid")
+//            
+//            let userID : String = UserDefaults.standard.value(forKey: "userid") as! String
+//            
+//            print("UserID: \(userID)")
+//        }else{
+//            
+//            let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+//            let nextViewController = storyBoard.instantiateViewController(withIdentifier: "SignUpPage") as! SignUpViewController
+//            
+//            
+//            self.navigationController?.present(nextViewController, animated: true)
+//            
+//        }
+//        }catch{
+//            
+//            print("error : userDefaults : \(error)")
+//            
+//        }
+        
+        if UIDevice.current.model.hasPrefix("iPad") {
+             self.view.transform = CGAffineTransform(scaleX: 2.0, y: 2.0)
+            print("iPad")
+        } else {
+            print("iPhone or iPod Touch")
+//            if UIApplication.isDeviceWithSafeArea {
+//                self.view.transform = CGAffineTransform(scaleX: 1.1, y: 1.1)
+//            }
+//            
+            
+//            if UIApplication.shared.statusBarFrame.height >= CGFloat(44) {
+//                self.view.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
+//            }
+        }
+        
         
         self.isYellowPopUpShown = false
         self.viewYellowPopUp.isHidden = true
@@ -215,4 +257,19 @@ class MainContainerViewController: UIViewController {
     }
 
 
+}
+
+extension UIApplication {
+    
+    static var isDeviceWithSafeArea:Bool {
+        
+        if #available(iOS 11.0, *) {
+            if let topPadding = shared.keyWindow?.safeAreaInsets.top,
+                topPadding > 0 {
+                return true
+            }
+        }
+        
+        return false
+    }
 }

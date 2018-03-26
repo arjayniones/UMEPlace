@@ -58,6 +58,7 @@ class ShareLearnViewController: UIViewController, UITableViewDelegate, UITableVi
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        NotificationCenter.default.post(name: NSNotification.Name("ShowBottomMenu"), object: nil)
        self.tableViewShareLesson.dataSource = self
         self.tableViewShareLesson.delegate = self
     }

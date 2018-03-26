@@ -61,6 +61,7 @@ class AdvicePageViewController: UIViewController , UITableViewDelegate, UITableV
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        NotificationCenter.default.post(name: NSNotification.Name("ShowBottomMenu"), object: nil)
         self.tableViewAdivice.dataSource = self
         self.tableViewAdivice.delegate = self
     }

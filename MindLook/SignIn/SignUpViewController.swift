@@ -32,8 +32,12 @@ class SignUpViewController: UIViewController, NSFetchedResultsControllerDelegate
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        if UIDevice.current.model.hasPrefix("iPad") {
+            self.view.transform = CGAffineTransform(scaleX: 2.0, y: 2.0)
+            print("iPad")
+        } else {
+            print("iPhone or iPod Touch")
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -51,7 +55,7 @@ class SignUpViewController: UIViewController, NSFetchedResultsControllerDelegate
         
         request.httpMethod = "POST"// Compose a query string
         
-        let postString = "email=\( self.txtEmail.text)&password=\( self.txtPassword.text)";
+        let postString = "email=\( self.txtEmail.text!)&password=\( self.txtPassword.text!)";
         
         request.httpBody = postString.data(using: String.Encoding.utf8);
         
@@ -98,7 +102,7 @@ class SignUpViewController: UIViewController, NSFetchedResultsControllerDelegate
                             
                             nextViewController.passedUserActCode = userInfo.activatecode!
                       
-                            
+                            UserDefaults.standard.setValue(userInfo.userid, forKey: "userid")
                             //self.navigationController?.present(nextViewController, animated: true)
                             
                             self.navigationController?.pushViewController(nextViewController,

@@ -244,7 +244,7 @@ class MainViewController: UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        NotificationCenter.default.post(name: NSNotification.Name("ShowBottomMenu"), object: nil)
+        self.showBottomMenu()
     }
     
     
@@ -670,9 +670,9 @@ class MainViewController: UIViewController {
         // tell the childviewcontroller it's contained in it's parent
         controller.didMove(toParentViewController: self)
         
+         self.title = "Mind Diary"
         
-        
-        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+//        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
     }
     
     @objc func showWLAChart(){
@@ -691,8 +691,8 @@ class MainViewController: UIViewController {
         controller.didMove(toParentViewController: self)
         
         
-        
-        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        self.title = "WLA Chart"
+//        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
     }
     
     @objc func showAdvicesOwnerPage(){
@@ -711,8 +711,8 @@ class MainViewController: UIViewController {
         controller.didMove(toParentViewController: self)
         
         
-        
-        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        self.title = "Advices"
+//        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
     }
     
     @objc func showLessonsOwnerPage(){
@@ -731,8 +731,8 @@ class MainViewController: UIViewController {
         controller.didMove(toParentViewController: self)
         
         
-        
-        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        self.title = "Lessons"
+//        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
     }
     
     @objc func showAboutPage(){
@@ -751,8 +751,8 @@ class MainViewController: UIViewController {
         controller.didMove(toParentViewController: self)
         
         
-        
-        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        self.title = "About MindLook"
+//        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
     }
     
     @objc func showTutorialHelpPage(){
@@ -770,9 +770,9 @@ class MainViewController: UIViewController {
         // tell the childviewcontroller it's contained in it's parent
         controller.didMove(toParentViewController: self)
         
+        self.title = "Tutorial & Help"
         
-        
-        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+//        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
     }
     
     
@@ -788,6 +788,8 @@ class MainViewController: UIViewController {
         
         self.navigationController?.pushViewController(controller,animated: true)
         
+       
+        
         //add as a childviewcontroller
         //addChildViewController(controller)
         
@@ -801,7 +803,7 @@ class MainViewController: UIViewController {
         
         
         
-        //self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+    self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         
         
         
@@ -830,7 +832,7 @@ class MainViewController: UIViewController {
         
         
         
-        //self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         
         
         

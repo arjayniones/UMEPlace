@@ -15,12 +15,50 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
 
+
      func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
        application.isStatusBarHidden = true
         
         
-       
-        
+//        let managedContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+//
+//        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "User")
+//        do{
+//            let eachUser = try managedContext.fetch(fetchRequest)
+//
+//            if (UserDefaults.standard.object(forKey: "userid") != nil && eachUser.count > 0) {
+//
+//                UserDefaults.standard.setValue(eachUser[0].value(forKey: "userid"), forKey: "userid")
+//
+//
+//            }else{
+                 //UserDefaults.standard.setValue("0000000", forKey: "userid")
+                
+//                // mainStoryboard
+//                let mainStoryboard = UIStoryboard(name: "MainStoryboard", bundle: nil)
+//                
+//                // rootViewController
+//                let rootViewController = mainStoryboard.instantiateViewController(withIdentifier: "SignUpViewController") as? SignUpViewController
+//                
+//                // navigationController
+//                let navigationController = UINavigationController(rootViewController: rootViewController!)
+//                
+//                navigationController.isNavigationBarHidden = true // or not, your choice.
+//                
+//                // self.window
+//                self.window = UIWindow(frame: UIScreen.main.bounds)
+//                
+//                self.window!.rootViewController = navigationController
+//                
+//                self.window!.makeKeyAndVisible()
+//            }
+//            
+//        }catch{
+//            
+//            print("error : userDefaults : \(error)")
+//            
+//        }
+//        
         
         
         

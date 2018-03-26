@@ -17,7 +17,15 @@ class SignInPageViewController: UIViewController {
         
         
         
-        self.view.transform = CGAffineTransform(scaleX: 2.0, y: 2.0)
+        if UIDevice.current.model.hasPrefix("iPad") {
+            self.view.transform = CGAffineTransform(scaleX: 2.0, y: 2.0)
+            print("iPad")
+        } else {
+            print("iPhone or iPod Touch")
+            if UIApplication.shared.statusBarFrame.height >= CGFloat(44) {
+                self.view.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+            }
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -37,6 +45,16 @@ class SignInPageViewController: UIViewController {
         //self.navigationController?.pushViewController(nextViewController,animated: true)
     }
     
+    @IBAction func btnForgetPassTapped(_ sender: Any) {
+        
+//        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+//        let nextViewController = storyBoard.instantiateViewController(withIdentifier: "ForgotPasswordPage") as! ForgotPasswordViewController
+//        
+//        
+//        
+//        
+//        self.navigationController?.pushViewController(nextViewController, animated: true)
+    }
     
 
 }

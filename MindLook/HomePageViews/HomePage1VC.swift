@@ -180,9 +180,8 @@ class HomePage1VC: UIViewController, ChartViewDelegate {
         
 //        imgViewSoda.loadGif(name: "soda_hello")
         
-//        let sodaGif = UIImage.gif(name: "dancebot-3-sm")
-//
-//        self.imgViewSoda.image = sodaGif
+        let sodaGif = UIImage.gif(name: "soda_00001")
+        self.imgViewSoda.image = sodaGif
         
         
 //        if let path = Bundle.main.path(forResource: "video", ofType: "mp4")

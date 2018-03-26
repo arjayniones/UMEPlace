@@ -25,6 +25,14 @@ class ValidationPageViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //check if ipad or iphone
+        if UIDevice.current.model.hasPrefix("iPad") {
+            self.view.transform = CGAffineTransform(scaleX: 2.0, y: 2.0)
+            print("iPad")
+        } else {
+            print("iPhone or iPod Touch")
+        }
 
         print("Passed UserID: \(self.passedUserID) \n Passed Activation Code: \(self.passedUserActCode)")
     }

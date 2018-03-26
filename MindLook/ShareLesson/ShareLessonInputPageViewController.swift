@@ -96,12 +96,19 @@ class ShareLessonInputPageViewController: UIViewController, UITextViewDelegate, 
     
     @IBOutlet weak var btnFeelGood: UIButton!
     
+    @IBOutlet weak var imgFeelGoodPlus: UIImageView!
+    
     @IBOutlet weak var btnAmOK: UIButton!
+    
+    @IBOutlet weak var imgAmOKPlus: UIImageView!
     
     @IBOutlet weak var btnFeelBad: UIButton!
     
+    @IBOutlet weak var imgFeelBadMinus: UIImageView!
+    
     @IBOutlet weak var btnNotOK: UIButton!
     
+    @IBOutlet weak var imgAmNotOKMinus: UIImageView!
     @IBOutlet weak var lblMyFeelings: UILabel!
     
     
@@ -680,11 +687,21 @@ class ShareLessonInputPageViewController: UIViewController, UITextViewDelegate, 
         btnFeelBad.backgroundColor = lightgray
         btnNotOK.backgroundColor = lightgray
         
-        btnFeelGood.setTitleColor(darkBlue, for: .normal)
+            
+       
+            btnFeelGood.setTitleColor(darkBlue, for: .normal)
+            
+            imgFeelGoodPlus.image = UIImage(named: "sodaplus_unselected")
         
         btnAmOK.setTitleColor(darkBlue, for: .normal)
+            
+            imgAmOKPlus.image = UIImage(named: "sodaplus_unselected")
         btnFeelBad.setTitleColor(darkBlue, for: .normal)
+            
+            imgFeelBadMinus.image = UIImage(named: "sodaminus_unselected")
         btnNotOK.setTitleColor(darkBlue, for: .normal)
+            
+            imgAmNotOKMinus.image = UIImage(named: "sodaminus_unselected")
         
         selectedStatus = "-"
             
@@ -698,10 +715,17 @@ class ShareLessonInputPageViewController: UIViewController, UITextViewDelegate, 
             
             btnFeelGood.setTitleColor(UIColor.white, for: .normal)
             
+            imgFeelGoodPlus.image = UIImage(named: "sodahead_plus_white")
             btnAmOK.setTitleColor(darkBlue, for: .normal)
             
+                imgAmOKPlus.image = UIImage(named: "sodaplus_unselected")
+            
             btnFeelBad.setTitleColor(darkBlue, for: .normal)
+            
+                imgFeelBadMinus.image = UIImage(named: "sodaminus_unselected")
             btnNotOK.setTitleColor(darkBlue, for: .normal)
+            
+                imgAmNotOKMinus.image = UIImage(named: "sodaminus_unselected")
             
             selectedStatus = "I feel good"
             
@@ -725,10 +749,19 @@ class ShareLessonInputPageViewController: UIViewController, UITextViewDelegate, 
         btnFeelBad.backgroundColor = lightgray
         btnNotOK.backgroundColor = lightgray
         
-        btnFeelGood.setTitleColor(darkBlue, for: .normal)
+       
+            btnFeelGood.setTitleColor(darkBlue, for: .normal)
+            
+            imgFeelGoodPlus.image = UIImage(named: "sodaplus_unselected")
         btnAmOK.setTitleColor(darkBlue, for: .normal)
+            
+             imgAmOKPlus.image = UIImage(named: "sodaplus_unselected")
         btnFeelBad.setTitleColor(darkBlue, for: .normal)
+            
+            imgFeelBadMinus.image = UIImage(named: "sodaminus_unselected")
         btnNotOK.setTitleColor(darkBlue, for: .normal)
+            
+            imgAmNotOKMinus.image = UIImage(named: "sodaminus_unselected")
         
         selectedStatus = "-"
         isAmOKSelected = false
@@ -740,9 +773,18 @@ class ShareLessonInputPageViewController: UIViewController, UITextViewDelegate, 
             btnNotOK.backgroundColor = lightgray
             
             btnFeelGood.setTitleColor(darkBlue, for: .normal)
+            
+            imgFeelGoodPlus.image = UIImage(named: "sodaplus_unselected")
             btnAmOK.setTitleColor(UIColor.white, for: .normal)
+           
+             imgAmOKPlus.image = UIImage(named: "sodahead_plus_white")
+            
             btnFeelBad.setTitleColor(darkBlue, for: .normal)
+            
+            imgFeelBadMinus.image = UIImage(named: "sodaminus_unselected")
             btnNotOK.setTitleColor(darkBlue, for: .normal)
+            
+            imgAmNotOKMinus.image = UIImage(named: "sodaminus_unselected")
             
             selectedStatus = "I am OK"
         self.changeFeelingsPositive()
@@ -766,9 +808,13 @@ class ShareLessonInputPageViewController: UIViewController, UITextViewDelegate, 
         btnNotOK.backgroundColor = lightgray
         
         btnFeelGood.setTitleColor(darkBlue, for: .normal)
+        imgFeelGoodPlus.image = UIImage(named: "sodaplus_unselected")
         btnAmOK.setTitleColor(darkBlue, for: .normal)
+        imgAmOKPlus.image = UIImage(named: "sodaplus_unselected")
         btnFeelBad.setTitleColor(darkBlue, for: .normal)
+        imgFeelBadMinus.image = UIImage(named: "sodaminus_unselected")
         btnNotOK.setTitleColor(darkBlue, for: .normal)
+        imgAmNotOKMinus.image = UIImage(named: "sodaminus_unselected")
         
         selectedStatus = "-"
           isFeelBadSelected = false
@@ -780,9 +826,13 @@ class ShareLessonInputPageViewController: UIViewController, UITextViewDelegate, 
             btnNotOK.backgroundColor = lightgray
             
             btnFeelGood.setTitleColor(darkBlue, for: .normal)
+            imgFeelGoodPlus.image = UIImage(named: "sodaplus_unselected")
             btnAmOK.setTitleColor(darkBlue, for: .normal)
+            imgAmOKPlus.image = UIImage(named: "sodaplus_unselected")
             btnFeelBad.setTitleColor(UIColor.white, for: .normal)
+            imgFeelBadMinus.image = UIImage(named: "sodahead_minus_white")
             btnNotOK.setTitleColor(darkBlue, for: .normal)
+            imgAmNotOKMinus.image = UIImage(named: "sodaminus_unselected")
             
             selectedStatus = "I feel bad"
             self.changeFeelingsNegative()
@@ -805,9 +855,15 @@ class ShareLessonInputPageViewController: UIViewController, UITextViewDelegate, 
         btnNotOK.backgroundColor = lightgray
         
         btnFeelGood.setTitleColor(darkBlue, for: .normal)
+        imgFeelGoodPlus.image = UIImage(named: "sodaplus_unselected")
         btnAmOK.setTitleColor(darkBlue, for: .normal)
+        imgAmOKPlus.image = UIImage(named: "sodaplus_unselected")
         btnFeelBad.setTitleColor(darkBlue, for: .normal)
+        imgFeelBadMinus.image = UIImage(named: "sodaminus_unselected")
         btnNotOK.setTitleColor(darkBlue, for: .normal)
+        imgAmNotOKMinus.image = UIImage(named: "sodaminus_unselected")
+            
+            
         
         selectedStatus = "-"
          isAmNotOKSelected = false
@@ -820,9 +876,13 @@ class ShareLessonInputPageViewController: UIViewController, UITextViewDelegate, 
                 btnNotOK.backgroundColor = darkBlue
                 
                 btnFeelGood.setTitleColor(darkBlue, for: .normal)
+                imgFeelGoodPlus.image = UIImage(named: "sodaplus_unselected")
                 btnAmOK.setTitleColor(darkBlue, for: .normal)
+                imgAmOKPlus.image = UIImage(named: "sodaplus_unselected")
                 btnFeelBad.setTitleColor(darkBlue, for: .normal)
+                imgFeelBadMinus.image = UIImage(named: "sodaminus_unselected")
                 btnNotOK.setTitleColor(UIColor.white, for: .normal)
+                imgAmNotOKMinus.image = UIImage(named: "sodahead_minus_white")
                 
                 selectedStatus = "I am not OK"
             self.changeFeelingsNegative()

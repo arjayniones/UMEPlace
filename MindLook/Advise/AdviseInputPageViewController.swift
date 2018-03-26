@@ -94,15 +94,26 @@ class AdviseInputPageViewController: UIViewController, UITextViewDelegate, UIPic
     @IBOutlet weak var lblMyStatusStory: UILabel!
     
     @IBOutlet weak var btnFeelGood: UIButton!
+    
+    @IBOutlet weak var imgFeelGoodPlus: UIImageView!
     @IBOutlet weak var viewFeelGood: UIView!
     
     @IBOutlet weak var btnAmOK: UIButton!
+    
+    @IBOutlet weak var imgAmOKPlus: UIImageView!
+    
     @IBOutlet weak var viewImOK: UIView!
     
     @IBOutlet weak var btnFeelBad: UIButton!
+    
+    @IBOutlet weak var imgFeelBadMinus: UIImageView!
+    
     @IBOutlet weak var viewFeelBad: UIView!
     
     @IBOutlet weak var btnNotOK: UIButton!
+    
+    @IBOutlet weak var imgAmNotOKMinus: UIImageView!
+    
     @IBOutlet weak var viewNotOK: UIView!
     
     @IBOutlet weak var lblMyFeelings: UILabel!
@@ -679,11 +690,21 @@ class AdviseInputPageViewController: UIViewController, UITextViewDelegate, UIPic
             btnFeelBad.backgroundColor = lightgray
             btnNotOK.backgroundColor = lightgray
             
+            
+            
             btnFeelGood.setTitleColor(darkBlue, for: .normal)
             
+            imgFeelGoodPlus.image = UIImage(named: "sodaplus_unselected")
+            
             btnAmOK.setTitleColor(darkBlue, for: .normal)
+            
+            imgAmOKPlus.image = UIImage(named: "sodaplus_unselected")
             btnFeelBad.setTitleColor(darkBlue, for: .normal)
+            
+            imgFeelBadMinus.image = UIImage(named: "sodaminus_unselected")
             btnNotOK.setTitleColor(darkBlue, for: .normal)
+            
+            imgAmNotOKMinus.image = UIImage(named: "sodaminus_unselected")
             
             selectedStatus = "-"
             
@@ -697,10 +718,17 @@ class AdviseInputPageViewController: UIViewController, UITextViewDelegate, UIPic
             
             btnFeelGood.setTitleColor(UIColor.white, for: .normal)
             
+            imgFeelGoodPlus.image = UIImage(named: "sodahead_plus_white")
             btnAmOK.setTitleColor(darkBlue, for: .normal)
             
+            imgAmOKPlus.image = UIImage(named: "sodaplus_unselected")
+            
             btnFeelBad.setTitleColor(darkBlue, for: .normal)
+            
+            imgFeelBadMinus.image = UIImage(named: "sodaminus_unselected")
             btnNotOK.setTitleColor(darkBlue, for: .normal)
+            
+            imgAmNotOKMinus.image = UIImage(named: "sodaminus_unselected")
             
             selectedStatus = "I feel good"
             
@@ -724,10 +752,19 @@ class AdviseInputPageViewController: UIViewController, UITextViewDelegate, UIPic
             btnFeelBad.backgroundColor = lightgray
             btnNotOK.backgroundColor = lightgray
             
+            
             btnFeelGood.setTitleColor(darkBlue, for: .normal)
+            
+            imgFeelGoodPlus.image = UIImage(named: "sodaplus_unselected")
             btnAmOK.setTitleColor(darkBlue, for: .normal)
+            
+            imgAmOKPlus.image = UIImage(named: "sodaplus_unselected")
             btnFeelBad.setTitleColor(darkBlue, for: .normal)
+            
+            imgFeelBadMinus.image = UIImage(named: "sodaminus_unselected")
             btnNotOK.setTitleColor(darkBlue, for: .normal)
+            
+            imgAmNotOKMinus.image = UIImage(named: "sodaminus_unselected")
             
             selectedStatus = "-"
             isAmOKSelected = false
@@ -739,9 +776,18 @@ class AdviseInputPageViewController: UIViewController, UITextViewDelegate, UIPic
             btnNotOK.backgroundColor = lightgray
             
             btnFeelGood.setTitleColor(darkBlue, for: .normal)
+            
+            imgFeelGoodPlus.image = UIImage(named: "sodaplus_unselected")
             btnAmOK.setTitleColor(UIColor.white, for: .normal)
+            
+            imgAmOKPlus.image = UIImage(named: "sodahead_plus_white")
+            
             btnFeelBad.setTitleColor(darkBlue, for: .normal)
+            
+            imgFeelBadMinus.image = UIImage(named: "sodaminus_unselected")
             btnNotOK.setTitleColor(darkBlue, for: .normal)
+            
+            imgAmNotOKMinus.image = UIImage(named: "sodaminus_unselected")
             
             selectedStatus = "I am OK"
             self.changeFeelingsPositive()
@@ -765,9 +811,13 @@ class AdviseInputPageViewController: UIViewController, UITextViewDelegate, UIPic
             btnNotOK.backgroundColor = lightgray
             
             btnFeelGood.setTitleColor(darkBlue, for: .normal)
+            imgFeelGoodPlus.image = UIImage(named: "sodaplus_unselected")
             btnAmOK.setTitleColor(darkBlue, for: .normal)
+            imgAmOKPlus.image = UIImage(named: "sodaplus_unselected")
             btnFeelBad.setTitleColor(darkBlue, for: .normal)
+            imgFeelBadMinus.image = UIImage(named: "sodaminus_unselected")
             btnNotOK.setTitleColor(darkBlue, for: .normal)
+            imgAmNotOKMinus.image = UIImage(named: "sodaminus_unselected")
             
             selectedStatus = "-"
             isFeelBadSelected = false
@@ -779,9 +829,13 @@ class AdviseInputPageViewController: UIViewController, UITextViewDelegate, UIPic
             btnNotOK.backgroundColor = lightgray
             
             btnFeelGood.setTitleColor(darkBlue, for: .normal)
+            imgFeelGoodPlus.image = UIImage(named: "sodaplus_unselected")
             btnAmOK.setTitleColor(darkBlue, for: .normal)
+            imgAmOKPlus.image = UIImage(named: "sodaplus_unselected")
             btnFeelBad.setTitleColor(UIColor.white, for: .normal)
+            imgFeelBadMinus.image = UIImage(named: "sodahead_minus_white")
             btnNotOK.setTitleColor(darkBlue, for: .normal)
+            imgAmNotOKMinus.image = UIImage(named: "sodaminus_unselected")
             
             selectedStatus = "I feel bad"
             self.changeFeelingsNegative()
@@ -804,9 +858,15 @@ class AdviseInputPageViewController: UIViewController, UITextViewDelegate, UIPic
             btnNotOK.backgroundColor = lightgray
             
             btnFeelGood.setTitleColor(darkBlue, for: .normal)
+            imgFeelGoodPlus.image = UIImage(named: "sodaplus_unselected")
             btnAmOK.setTitleColor(darkBlue, for: .normal)
+            imgAmOKPlus.image = UIImage(named: "sodaplus_unselected")
             btnFeelBad.setTitleColor(darkBlue, for: .normal)
+            imgFeelBadMinus.image = UIImage(named: "sodaminus_unselected")
             btnNotOK.setTitleColor(darkBlue, for: .normal)
+            imgAmNotOKMinus.image = UIImage(named: "sodaminus_unselected")
+            
+            
             
             selectedStatus = "-"
             isAmNotOKSelected = false
@@ -819,9 +879,13 @@ class AdviseInputPageViewController: UIViewController, UITextViewDelegate, UIPic
             btnNotOK.backgroundColor = darkBlue
             
             btnFeelGood.setTitleColor(darkBlue, for: .normal)
+            imgFeelGoodPlus.image = UIImage(named: "sodaplus_unselected")
             btnAmOK.setTitleColor(darkBlue, for: .normal)
+            imgAmOKPlus.image = UIImage(named: "sodaplus_unselected")
             btnFeelBad.setTitleColor(darkBlue, for: .normal)
+            imgFeelBadMinus.image = UIImage(named: "sodaminus_unselected")
             btnNotOK.setTitleColor(UIColor.white, for: .normal)
+            imgAmNotOKMinus.image = UIImage(named: "sodahead_minus_white")
             
             selectedStatus = "I am not OK"
             self.changeFeelingsNegative()
