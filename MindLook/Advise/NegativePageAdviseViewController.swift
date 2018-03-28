@@ -25,6 +25,7 @@ class NegativePageAdviseViewController: UIViewController, ChartViewDelegate {
     @IBOutlet weak var btnAskAdvise: UIButton!
     @IBOutlet weak var viewLineChartStatus: LineChartView!
     
+    @IBOutlet weak var btnSorry: HalfRoundButton!
     
     @IBOutlet weak var viewSorry: UIView!
     @IBAction func showInputAskAdvise(_ sender: Any) {
@@ -83,15 +84,15 @@ class NegativePageAdviseViewController: UIViewController, ChartViewDelegate {
         viewLineChartStatus.legend.form = .line
         
         
-//        imgViewSoda.loadGif(name: "soda")
+        imgViewSoda.loadGif(name: "soda_00002")
         
         self.title = "Ask for Advise?"
 
-        self.viewSorry.layer.borderColor = darkBlue.withAlphaComponent(0.5).cgColor
-        self.viewSorry.layer.borderWidth = 1
+        self.btnAskAdvise.layer.borderColor = darkBlue.withAlphaComponent(0.5).cgColor
+        self.btnAskAdvise.layer.borderWidth = 1
         
-        self.viewAskAdvice.layer.borderColor = darkBlue.withAlphaComponent(0.5).cgColor
-        self.viewAskAdvice.layer.borderWidth = 1
+        self.btnSorry.layer.borderColor = darkBlue.withAlphaComponent(0.5).cgColor
+        self.btnSorry.layer.borderWidth = 1
     }
 
     override func didReceiveMemoryWarning() {
@@ -107,6 +108,8 @@ class NegativePageAdviseViewController: UIViewController, ChartViewDelegate {
         let values = (0..<count).map { (i) -> ChartDataEntry in
             //let val = Double(arc4random_uniform(range) + 3)
             return ChartDataEntry(x: Double(i+1), y: Double(self.posStatPercentage[i]))
+            
+           
         }
         
         let set1 = LineChartDataSet(values: values, label: "")
@@ -123,6 +126,7 @@ class NegativePageAdviseViewController: UIViewController, ChartViewDelegate {
         set1.formLineDashLengths = [5, 2.5]
         set1.formLineWidth = 1
         set1.formSize = 15
+        
         
         let gradientColors = [ChartColorTemplates.colorFromString("#1e79e6").cgColor,
                               ChartColorTemplates.colorFromString("#ffffff").cgColor]

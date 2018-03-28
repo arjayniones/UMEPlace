@@ -62,7 +62,7 @@ class ForgotPasswordViewController: UIViewController {
                     
                     let result = String(data: data!, encoding: .utf8)
                     
-                     print("This is the JSON Data: \(result)")
+                     print("This is the JSON Data: \(result!)")
                     if result == "1" {
                         
                       

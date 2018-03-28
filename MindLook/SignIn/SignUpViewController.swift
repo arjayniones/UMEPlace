@@ -105,10 +105,10 @@ class SignUpViewController: UIViewController, NSFetchedResultsControllerDelegate
                             UserDefaults.standard.setValue(userInfo.userid, forKey: "userid")
                             //self.navigationController?.present(nextViewController, animated: true)
                             
-                            self.navigationController?.pushViewController(nextViewController,
-                                                                                    animated: true)
+                            self.navigationController?.pushViewController(nextViewController,animated: true)
                             
-                            print("JSON Data \n UserID : \(String(describing: userInfo.userid)) \n Email : \(String(describing: userInfo.email)) \n Password : \(String(describing: userInfo.password)) \n Update : \(String(describing: userInfo.update)) \n Inactive : \(userInfo.inactive) \n Activation Code : \(String(describing: userInfo.activatecode))")
+                            
+                            print("JSON Data \n UserID : \(String(describing: userInfo.userid!)) \n Email : \(String(describing: userInfo.email!)) \n Password : \(String(describing: userInfo.password!)) \n Update : \(String(describing: userInfo.update!)) \n Inactive : \(userInfo.inactive) \n Activation Code : \(String(describing: userInfo.activatecode!))")
                         }
                     }
                     

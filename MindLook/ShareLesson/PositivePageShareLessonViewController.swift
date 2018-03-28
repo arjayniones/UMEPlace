@@ -88,15 +88,15 @@ class PositivePageShareLessonViewController: UIViewController, ChartViewDelegate
         
         
         
-//        imgViewSoda.loadGif(name: "soda_hello")
+        imgViewSoda.loadGif(name: "soda_00002")
         
         self.title = "Share Lesson?"
 
-        self.viewSorry.layer.borderColor = darkBlue.withAlphaComponent(0.5).cgColor
-        self.viewSorry.layer.borderWidth = 1
+        self.btnShareLesson.layer.borderColor = darkBlue.withAlphaComponent(0.5).cgColor
+        self.btnShareLesson.layer.borderWidth = 1
         
-        self.viewShareLesson.layer.borderColor = darkBlue.withAlphaComponent(0.5).cgColor
-        self.viewShareLesson.layer.borderWidth = 1
+        self.btnSorryMaybeLater.layer.borderColor = darkBlue.withAlphaComponent(0.5).cgColor
+        self.btnSorryMaybeLater.layer.borderWidth = 1
         
     }
 
