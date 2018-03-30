@@ -200,6 +200,7 @@ class ShareLessonInputPageViewController: UIViewController, UITextViewDelegate, 
     
     @IBOutlet weak var btnVeryHigh: UIButton!
     
+    @IBOutlet weak var viewSection6: UIView!
     
     
     
@@ -687,7 +688,7 @@ class ShareLessonInputPageViewController: UIViewController, UITextViewDelegate, 
         btnFeelBad.backgroundColor = lightgray
         btnNotOK.backgroundColor = lightgray
         
-            
+            self.viewSection6.isHidden = true
        
             btnFeelGood.setTitleColor(darkBlue, for: .normal)
             
@@ -713,6 +714,8 @@ class ShareLessonInputPageViewController: UIViewController, UITextViewDelegate, 
             btnFeelBad.backgroundColor = lightgray
             btnNotOK.backgroundColor = lightgray
             
+           
+            self.viewSection6.isHidden = false
             btnFeelGood.setTitleColor(UIColor.white, for: .normal)
             
             imgFeelGoodPlus.image = UIImage(named: "sodahead_plus_white")
@@ -741,7 +744,7 @@ class ShareLessonInputPageViewController: UIViewController, UITextViewDelegate, 
     @IBAction func btnImOKClicked(_ sender: Any) {
         
       
-        
+       
         
         if isAmOKSelected == true {
         btnFeelGood.backgroundColor = lightgray
@@ -749,7 +752,7 @@ class ShareLessonInputPageViewController: UIViewController, UITextViewDelegate, 
         btnFeelBad.backgroundColor = lightgray
         btnNotOK.backgroundColor = lightgray
         
-       
+       self.viewSection6.isHidden = true
             btnFeelGood.setTitleColor(darkBlue, for: .normal)
             
             imgFeelGoodPlus.image = UIImage(named: "sodaplus_unselected")
@@ -772,6 +775,7 @@ class ShareLessonInputPageViewController: UIViewController, UITextViewDelegate, 
             btnFeelBad.backgroundColor = lightgray
             btnNotOK.backgroundColor = lightgray
             
+            self.viewSection6.isHidden = false
             btnFeelGood.setTitleColor(darkBlue, for: .normal)
             
             imgFeelGoodPlus.image = UIImage(named: "sodaplus_unselected")
@@ -807,6 +811,8 @@ class ShareLessonInputPageViewController: UIViewController, UITextViewDelegate, 
         btnFeelBad.backgroundColor = lightgray
         btnNotOK.backgroundColor = lightgray
         
+         self.viewSection6.isHidden = true
+            
         btnFeelGood.setTitleColor(darkBlue, for: .normal)
         imgFeelGoodPlus.image = UIImage(named: "sodaplus_unselected")
         btnAmOK.setTitleColor(darkBlue, for: .normal)
@@ -825,6 +831,7 @@ class ShareLessonInputPageViewController: UIViewController, UITextViewDelegate, 
             btnFeelBad.backgroundColor = darkBlue
             btnNotOK.backgroundColor = lightgray
             
+            self.viewSection6.isHidden = false
             btnFeelGood.setTitleColor(darkBlue, for: .normal)
             imgFeelGoodPlus.image = UIImage(named: "sodaplus_unselected")
             btnAmOK.setTitleColor(darkBlue, for: .normal)
@@ -855,6 +862,9 @@ class ShareLessonInputPageViewController: UIViewController, UITextViewDelegate, 
         btnNotOK.backgroundColor = lightgray
         
         btnFeelGood.setTitleColor(darkBlue, for: .normal)
+            
+        self.viewSection6.isHidden = true
+            
         imgFeelGoodPlus.image = UIImage(named: "sodaplus_unselected")
         btnAmOK.setTitleColor(darkBlue, for: .normal)
         imgAmOKPlus.image = UIImage(named: "sodaplus_unselected")
@@ -875,7 +885,8 @@ class ShareLessonInputPageViewController: UIViewController, UITextViewDelegate, 
                 btnFeelBad.backgroundColor = lightgray
                 btnNotOK.backgroundColor = darkBlue
                 
-                btnFeelGood.setTitleColor(darkBlue, for: .normal)
+            self.viewSection6.isHidden = false
+            btnFeelGood.setTitleColor(darkBlue, for: .normal)
                 imgFeelGoodPlus.image = UIImage(named: "sodaplus_unselected")
                 btnAmOK.setTitleColor(darkBlue, for: .normal)
                 imgAmOKPlus.image = UIImage(named: "sodaplus_unselected")

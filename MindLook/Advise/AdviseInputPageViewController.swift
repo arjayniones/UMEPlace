@@ -212,6 +212,7 @@ class AdviseInputPageViewController: UIViewController, UITextViewDelegate, UIPic
     @IBOutlet weak var btnVeryHigh: HalfRoundButton!
     
     
+    @IBOutlet weak var viewSection6: UIView!
     
     
     
@@ -691,7 +692,7 @@ class AdviseInputPageViewController: UIViewController, UITextViewDelegate, UIPic
             btnNotOK.backgroundColor = lightgray
             
             
-            
+            self.viewSection6.isHidden = true
             btnFeelGood.setTitleColor(darkBlue, for: .normal)
             
             imgFeelGoodPlus.image = UIImage(named: "sodaplus_unselected")
@@ -715,6 +716,8 @@ class AdviseInputPageViewController: UIViewController, UITextViewDelegate, UIPic
             btnAmOK.backgroundColor = lightgray
             btnFeelBad.backgroundColor = lightgray
             btnNotOK.backgroundColor = lightgray
+            
+           self.viewSection6.isHidden = false
             
             btnFeelGood.setTitleColor(UIColor.white, for: .normal)
             
@@ -752,7 +755,7 @@ class AdviseInputPageViewController: UIViewController, UITextViewDelegate, UIPic
             btnFeelBad.backgroundColor = lightgray
             btnNotOK.backgroundColor = lightgray
             
-            
+            self.viewSection6.isHidden = true
             btnFeelGood.setTitleColor(darkBlue, for: .normal)
             
             imgFeelGoodPlus.image = UIImage(named: "sodaplus_unselected")
@@ -775,6 +778,7 @@ class AdviseInputPageViewController: UIViewController, UITextViewDelegate, UIPic
             btnFeelBad.backgroundColor = lightgray
             btnNotOK.backgroundColor = lightgray
             
+           self.viewSection6.isHidden = false
             btnFeelGood.setTitleColor(darkBlue, for: .normal)
             
             imgFeelGoodPlus.image = UIImage(named: "sodaplus_unselected")
@@ -810,6 +814,7 @@ class AdviseInputPageViewController: UIViewController, UITextViewDelegate, UIPic
             btnFeelBad.backgroundColor = lightgray
             btnNotOK.backgroundColor = lightgray
             
+            self.viewSection6.isHidden = true
             btnFeelGood.setTitleColor(darkBlue, for: .normal)
             imgFeelGoodPlus.image = UIImage(named: "sodaplus_unselected")
             btnAmOK.setTitleColor(darkBlue, for: .normal)
@@ -828,6 +833,8 @@ class AdviseInputPageViewController: UIViewController, UITextViewDelegate, UIPic
             btnFeelBad.backgroundColor = darkBlue
             btnNotOK.backgroundColor = lightgray
             
+           
+           self.viewSection6.isHidden = false
             btnFeelGood.setTitleColor(darkBlue, for: .normal)
             imgFeelGoodPlus.image = UIImage(named: "sodaplus_unselected")
             btnAmOK.setTitleColor(darkBlue, for: .normal)
@@ -857,6 +864,7 @@ class AdviseInputPageViewController: UIViewController, UITextViewDelegate, UIPic
             btnFeelBad.backgroundColor = lightgray
             btnNotOK.backgroundColor = lightgray
             
+           self.viewSection6.isHidden = true
             btnFeelGood.setTitleColor(darkBlue, for: .normal)
             imgFeelGoodPlus.image = UIImage(named: "sodaplus_unselected")
             btnAmOK.setTitleColor(darkBlue, for: .normal)
@@ -878,6 +886,7 @@ class AdviseInputPageViewController: UIViewController, UITextViewDelegate, UIPic
             btnFeelBad.backgroundColor = lightgray
             btnNotOK.backgroundColor = darkBlue
             
+            self.viewSection6.isHidden = false
             btnFeelGood.setTitleColor(darkBlue, for: .normal)
             imgFeelGoodPlus.image = UIImage(named: "sodaplus_unselected")
             btnAmOK.setTitleColor(darkBlue, for: .normal)

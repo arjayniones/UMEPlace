@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class SignInPageViewController: UIViewController {
 
@@ -105,6 +106,8 @@ class SignInPageViewController: UIViewController {
                             // do something like...
                             
                             
+                            
+                            
                         }))
                         
                         self.present(alert, animated: true, completion: nil)
@@ -184,15 +187,17 @@ class SignInPageViewController: UIViewController {
     
     func gotoMain(){
         
-        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
-        let nextViewController = storyBoard.instantiateViewController(withIdentifier: "MainPage") as! MainContainerViewController
+        
+                let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+                let nextViewController = storyBoard.instantiateViewController(withIdentifier: "MainPage") as! MainContainerViewController
+                
+              
+                self.navigationController?.present(nextViewController, animated: true)
+                
+                //self.navigationController?.pushViewController(nextViewController,animated: true)
+      
         
         
-        
-        
-        self.navigationController?.present(nextViewController, animated: true)
-        
-        //self.navigationController?.pushViewController(nextViewController,animated: true)
     }
     
     func gotoSignUp(){
