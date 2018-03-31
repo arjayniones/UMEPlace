@@ -10,12 +10,13 @@ import UIKit
 
 class ShareLessonInputPageViewController: UIViewController, UITextViewDelegate, UIPickerViewDelegate,UIPickerViewDataSource {
 
-    
+    let userID : String = UserDefaults.standard.value(forKey: "userid") as! String
+    var selectedLanguage = 1
     //arrays for options
     
-    let subjectOptions = ["I", "Someone", "Something"]
-    let verbOptions = ["Damage", "Do", "Eat", "Get", "Hear", "Help", "Hit/Hurt", "Lose", "Make", "Say", "See", "Smell","Think", "Touch"]
-    let objectOptions = ["Me/Myself","Mine", "Nothing", "Someone", "Something"]
+    let subjectOptions = ["Subject","I", "Someone", "Something"]
+    let verbOptions = ["Verb","Damage", "Do", "Eat", "Get", "Hear", "Help", "Hit/Hurt", "Lose", "Make", "Say", "See", "Smell","Think", "Touch"]
+    let objectOptions = ["Object","Me/Myself","Mine", "Nothing", "Someone", "Something"]
     
     var numItems = 0
     
@@ -74,6 +75,36 @@ class ShareLessonInputPageViewController: UIViewController, UITextViewDelegate, 
     var valueToRemoveOnEffectsOnMe = [String]()
     
     var selectedRootCause = ""
+    var isSelectedStatusPositive = true
+    var mainPostType = 1
+    var currentDate = ""
+    
+    //input variables
+    
+    var section1 = ""
+    var section2 = ""
+    var section3 = ""
+    var section4 = ""
+    var section5 = 0
+    var section6_list = 0
+    var section6_fill = ""
+    var section7_s = 0
+    var section7_v = 0
+    var section7_o = 0
+    var section7_e1 = 0
+    var section7_e2 = 0
+    var section7_e3 = 0
+    var section7_e4 = 0
+    var section7_e5 = 0
+    var section7_e6 = 0
+    var section7_e7 = 0
+    var section7_e8 = 0
+    var section7_scale = 0
+    var section8 = 0
+    var section9 = ""
+    var section10 = 0
+    
+    
     
     
     @IBOutlet weak var lblMyLesson: UILabel!
@@ -304,7 +335,81 @@ class ShareLessonInputPageViewController: UIViewController, UITextViewDelegate, 
     //submit to the server
     @IBAction func sendInput(_ sender: Any) {
         
-         print("My Question: \(txtViewMyLesson.text as String)\nMy Story in Brief: \(txtViewMyStoryInBrief.text as String)\nMy Full Story: \(txtViewMyFullStory.text as String)\nTags for My Story: \(txtViewTagStory.text as String)\nMy Status in My Story: \(selectedStatus)\nMy Feelings & Emotions in My Story: \(selectedFeelings)\nAbout me in the Story \nSubject: \(selectedSubject)\nVerb: \(selectedVerb)\nObject: \(selectedObject)\nEffects on me: \(selectedEffectsOnMeValues)\nRoot Cause of My Story: \(selectedRootCause)")
+        self.section1 = txtViewMyLesson.text!
+        self.section2 = txtViewMyStoryInBrief.text!
+        self.section3 = txtViewMyFullStory.text!
+        self.section4 = txtViewTagStory.text!
+        
+        if self.section6_fill == ""{
+            self.section6_fill = "-"
+        }else{
+            self.section6_fill = txtOtherFeelings.text!
+        }
+        self.section9 = txtMyNote.text!
+        self.getCurrentDate()
+        self.postInput()
+        
+         print("My Question: \(txtViewMyLesson.text!)\nMy Story in Brief: \(txtViewMyStoryInBrief.text!)\nMy Full Story: \(txtViewMyFullStory.text!)\nTags for My Story: \(txtViewTagStory.text!)\nMy Status in My Story: \(section5)\nMy Feelings & Emotions in My Story: \(section6_list)\nAbout me in the Story \nSubject: \(selectedSubject)\nVerb: \(selectedVerb)\nObject: \(selectedObject)\nEffects on me: \(selectedEffectsOnMeValues)\nRoot Cause of My Story: \(selectedRootCause)")
+        
+        
+    }
+    
+    func getCurrentDate(){
+        
+     
+        
+        let currentDate = Date()
+        let dateFormatter = DateFormatter()
+        
+        dateFormatter.dateFormat = "dd-MM-yyyy"
+        let convertedDate: String = dateFormatter.string(from: currentDate)
+        
+        self.currentDate = convertedDate
+    }
+    
+    func postInput()
+    {
+        
+        //POST Request
+        
+        let myUrl = URL(string: "http://103.86.48.128/PostMain/addpostmain?");
+        
+        var request = URLRequest(url:myUrl!)
+        
+        request.httpMethod = "POST"// Compose a query string
+        
+        let postString = "userid=\( self.userID)&post_datetime=\( self.currentDate)&type=\(1)&language=\(self.selectedLanguage)&section1=\(self.section1)&section2=\(self.section2)&section3=\(self.section3)&section4=\(self.section4)&section5=\(self.section5)&section6_list=\(self.section6_list)&section6_fill=\(self.section6_fill)&section7_s=\(self.section7_s)&section7_v=\(self.section7_v)&section7_o=\(self.section7_o)&section7_e1=\(self.section7_e1)&section7_e2=\(self.section7_e2)&section7_e3=\(self.section7_e3)&section7_e4=\(self.section7_e4)&section7_e5=\(self.section7_e5)&section7_e6=\(self.section7_e6)&section7_e7=\(self.section7_e7)&section7_e8=\(self.section7_e8)&section7_scale=\(self.section7_scale)&section8=\(self.section8)&section9=\(self.section9)&section10=\(self.section10)";
+        
+        request.httpBody = postString.data(using: String.Encoding.utf8);
+        
+        let task = URLSession.shared.dataTask(with: request) { (data: Data?, response: URLResponse?, error: Error?) in
+            
+            if error != nil
+            {
+                print("error=\(error)")
+                return
+            }
+            
+            // You can print out response object
+            print("response = \(response)")
+            print(postString)
+            //Let's convert response sent from a server side script to a NSDictionary object:
+            do {
+                let json = try JSONSerialization.jsonObject(with: data!) as! [Any]
+                
+                print("This is the JSON Data: \(json)")
+                
+                
+            } catch {
+                print(error)
+                
+                
+            }
+        }
+        task.resume()
+        
+        
+        
         
     }
     
@@ -314,6 +419,7 @@ class ShareLessonInputPageViewController: UIViewController, UITextViewDelegate, 
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        print("userID = \(self.userID)")
        
          self.navigationItem.setHidesBackButton(true, animated:true);
 //        _ = navigationController?.navigationItem.backBarButtonItem?.title = ""
@@ -558,11 +664,20 @@ class ShareLessonInputPageViewController: UIViewController, UITextViewDelegate, 
         // Dispose of any resources that can be recreated.
     }
     
+    //functions for all sections
+    
+    
+    
     //to remove back button text
     func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
         let item = UIBarButtonItem(title: " ", style: .plain, target: nil, action: nil)
         viewController.navigationItem.backBarButtonItem = item
     }
+    
+    
+    
+    
+    
     
     
     //placeholder func
@@ -626,16 +741,21 @@ class ShareLessonInputPageViewController: UIViewController, UITextViewDelegate, 
         if (selectedPicker == "subject")
         {
            self.btnSubject.setTitle(subjectOptions[row], for: UIControlState.normal)
+            
+            section7_s = row
         }
         else if (selectedPicker == "verb")
         {
             self.btnVerb.setTitle(verbOptions[row], for: UIControlState.normal)
+            section7_v = row
         }
         else if (selectedPicker == "object")
         {
             self.btnObject.setTitle(objectOptions[row], for: UIControlState.normal)
+            section7_o = row
         }else{
             self.btnSubject.setTitle(" ", for: UIControlState.normal)
+            
         }
        
         
@@ -705,6 +825,7 @@ class ShareLessonInputPageViewController: UIViewController, UITextViewDelegate, 
             imgAmNotOKMinus.image = UIImage(named: "sodaminus_unselected")
         
         selectedStatus = "-"
+            section5 = 0
             
             
             isFeelGoodSelected = false
@@ -731,6 +852,9 @@ class ShareLessonInputPageViewController: UIViewController, UITextViewDelegate, 
                 imgAmNotOKMinus.image = UIImage(named: "sodaminus_unselected")
             
             selectedStatus = "I feel good"
+            section5 = 1
+            
+            isSelectedStatusPositive = true
             
         self.changeFeelingsPositive()
             isFeelGoodSelected = true
@@ -767,6 +891,7 @@ class ShareLessonInputPageViewController: UIViewController, UITextViewDelegate, 
             imgAmNotOKMinus.image = UIImage(named: "sodaminus_unselected")
         
         selectedStatus = "-"
+            section5 = 0
         isAmOKSelected = false
         }else{
             
@@ -791,6 +916,8 @@ class ShareLessonInputPageViewController: UIViewController, UITextViewDelegate, 
             imgAmNotOKMinus.image = UIImage(named: "sodaminus_unselected")
             
             selectedStatus = "I am OK"
+            section5 = 2
+            isSelectedStatusPositive = true
         self.changeFeelingsPositive()
             isFeelGoodSelected = false
             isAmOKSelected = true
@@ -823,6 +950,7 @@ class ShareLessonInputPageViewController: UIViewController, UITextViewDelegate, 
         imgAmNotOKMinus.image = UIImage(named: "sodaminus_unselected")
         
         selectedStatus = "-"
+            section5 = 0
           isFeelBadSelected = false
         }else{
             
@@ -842,6 +970,8 @@ class ShareLessonInputPageViewController: UIViewController, UITextViewDelegate, 
             imgAmNotOKMinus.image = UIImage(named: "sodaminus_unselected")
             
             selectedStatus = "I feel bad"
+            section5 = 3
+            isSelectedStatusPositive = false
             self.changeFeelingsNegative()
             isFeelGoodSelected = false
             isAmOKSelected = false
@@ -876,6 +1006,7 @@ class ShareLessonInputPageViewController: UIViewController, UITextViewDelegate, 
             
         
         selectedStatus = "-"
+            section5 = 0
          isAmNotOKSelected = false
             
         }else{
@@ -896,6 +1027,8 @@ class ShareLessonInputPageViewController: UIViewController, UITextViewDelegate, 
                 imgAmNotOKMinus.image = UIImage(named: "sodahead_minus_white")
                 
                 selectedStatus = "I am not OK"
+            section5 = 4
+            isSelectedStatusPositive = true
             self.changeFeelingsNegative()
             isFeelGoodSelected = false
             isAmOKSelected = false
@@ -938,7 +1071,8 @@ class ShareLessonInputPageViewController: UIViewController, UITextViewDelegate, 
         viewInspired.backgroundColor = UIColor.clear
         viewInspired.layer.borderWidth = 0
         
-        selectedFeelings = "-"
+        
+            section6_list = 0
         isfeeling1Selected = false
         }else{
             
@@ -972,8 +1106,14 @@ class ShareLessonInputPageViewController: UIViewController, UITextViewDelegate, 
             viewInspired.layer.borderWidth = 0
             
            
-            selectedFeelings = "Sympathized"
-            
+            //change this code when server is updated
+            if isSelectedStatusPositive == true {
+            section6_list = 1
+            }
+            else
+            {
+                section6_list = 9
+            }
             isfeeling1Selected = true
             isfeeling2Selected = false
             isfeeling3Selected = false
@@ -1016,7 +1156,7 @@ class ShareLessonInputPageViewController: UIViewController, UITextViewDelegate, 
         
         viewInspired.backgroundColor = UIColor.clear
         viewInspired.layer.borderWidth = 0
-        selectedFeelings = "-"
+        section6_list = 0
             isfeeling2Selected = false
             
         }else{
@@ -1050,8 +1190,15 @@ class ShareLessonInputPageViewController: UIViewController, UITextViewDelegate, 
                 
                 viewInspired.backgroundColor = UIColor.clear
                 viewInspired.layer.borderWidth = 0
-               
-                selectedFeelings = "Pleased"
+            
+            //change values when server is updated
+            if isSelectedStatusPositive == true {
+                section6_list = 2
+            }
+            else
+            {
+                section6_list = 10
+            }
                 
             isfeeling1Selected = false
             isfeeling2Selected = true
@@ -1100,7 +1247,8 @@ class ShareLessonInputPageViewController: UIViewController, UITextViewDelegate, 
         
         viewInspired.backgroundColor = UIColor.clear
         viewInspired.layer.borderWidth = 0
-        selectedFeelings = "-"
+        
+                section6_list = 0
                 
                 isfeeling3Selected = false
             }else {
@@ -1133,7 +1281,16 @@ class ShareLessonInputPageViewController: UIViewController, UITextViewDelegate, 
                 
                 viewInspired.backgroundColor = UIColor.clear
                 viewInspired.layer.borderWidth = 0
-                selectedFeelings = "Calm"
+                
+                
+                //change values when server is updated
+                if isSelectedStatusPositive == true {
+                    section6_list = 3
+                }
+                else
+                {
+                    section6_list = 11
+                }
                 
                 isfeeling1Selected = false
                 isfeeling2Selected = false
@@ -1177,7 +1334,7 @@ class ShareLessonInputPageViewController: UIViewController, UITextViewDelegate, 
         
         viewInspired.backgroundColor = UIColor.clear
         viewInspired.layer.borderWidth = 0
-        selectedFeelings = "-"
+        section6_list = 0
             
             isfeeling4Selected = false
         }else{
@@ -1209,7 +1366,15 @@ class ShareLessonInputPageViewController: UIViewController, UITextViewDelegate, 
             
             viewInspired.backgroundColor = UIColor.clear
             viewInspired.layer.borderWidth = 0
-            selectedFeelings = "Relaxed"
+            
+            //change values when server is updated
+            if isSelectedStatusPositive == true {
+                section6_list = 4
+            }
+            else
+            {
+                section6_list = 12
+            }
             
             isfeeling1Selected = false
             isfeeling2Selected = false
@@ -1254,8 +1419,8 @@ class ShareLessonInputPageViewController: UIViewController, UITextViewDelegate, 
         
         viewInspired.backgroundColor = UIColor.clear
         viewInspired.layer.borderWidth = 0
-        selectedFeelings = "-"
-            
+        
+            section6_list = 0
             isfeeling5Selected = false
         }else{
             
@@ -1287,7 +1452,15 @@ class ShareLessonInputPageViewController: UIViewController, UITextViewDelegate, 
             
             viewInspired.backgroundColor = UIColor.clear
             viewInspired.layer.borderWidth = 0
-            selectedFeelings = "Excited"
+            
+            //change values when server is updated
+            if isSelectedStatusPositive == true {
+                section6_list = 5
+            }
+            else
+            {
+                section6_list = 13
+            }
             
             isfeeling1Selected = false
             isfeeling2Selected = false
@@ -1331,7 +1504,7 @@ class ShareLessonInputPageViewController: UIViewController, UITextViewDelegate, 
         viewInspired.backgroundColor = UIColor.clear
         viewInspired.layer.borderWidth = 0
         
-        selectedFeelings = "-"
+        section6_list = 0
             isfeeling6Selected = false
         }else{
             
@@ -1364,7 +1537,15 @@ class ShareLessonInputPageViewController: UIViewController, UITextViewDelegate, 
             viewInspired.backgroundColor = UIColor.clear
             viewInspired.layer.borderWidth = 0
             
-            selectedFeelings = "Cheerful"
+            //change values when server is updated
+            if isSelectedStatusPositive == true {
+                section6_list = 6
+            }
+            else
+            {
+                section6_list = 14
+            }
+            
             isfeeling1Selected = false
             isfeeling2Selected = false
             isfeeling3Selected = false
@@ -1407,7 +1588,7 @@ class ShareLessonInputPageViewController: UIViewController, UITextViewDelegate, 
         
         viewInspired.backgroundColor = UIColor.clear
         viewInspired.layer.borderWidth = 0
-        selectedFeelings = "-"
+        section6_list = 0
             isfeeling7Selected = false
             
         }else {
@@ -1440,7 +1621,16 @@ class ShareLessonInputPageViewController: UIViewController, UITextViewDelegate, 
             
             viewInspired.backgroundColor = UIColor.clear
             viewInspired.layer.borderWidth = 0
-            selectedFeelings = "Happy"
+            
+            //change values when server is updated
+            if isSelectedStatusPositive == true {
+                section6_list = 7
+            }
+            else
+            {
+                section6_list = 15
+            }
+            
             isfeeling1Selected = false
             isfeeling2Selected = false
             isfeeling3Selected = false
@@ -1482,7 +1672,7 @@ class ShareLessonInputPageViewController: UIViewController, UITextViewDelegate, 
         
         viewHappy.backgroundColor = UIColor.clear
         viewHappy.layer.borderWidth = 0
-        //selectedFeelings = "Inspired"
+        section6_list = 0
             isfeeling8Selected = false
         }else{
             
@@ -1514,7 +1704,14 @@ class ShareLessonInputPageViewController: UIViewController, UITextViewDelegate, 
             
             viewHappy.backgroundColor = UIColor.clear
             viewHappy.layer.borderWidth = 0
-            //selectedFeelings = "Inspired"
+            //change values when server is updated
+            if isSelectedStatusPositive == true {
+                section6_list = 8
+            }
+            else
+            {
+                section6_list = 16
+            }
             isfeeling8Selected = true
             
         }
@@ -1567,6 +1764,7 @@ class ShareLessonInputPageViewController: UIViewController, UITextViewDelegate, 
             let btnTitle = sender.title(for: .normal)
             
             valueToRemoveOnEffectsOnMe.append(btnTitle!)
+            section7_e1 = 0
         }
         else{
             isPhysicalBodySelected = true
@@ -1578,6 +1776,7 @@ class ShareLessonInputPageViewController: UIViewController, UITextViewDelegate, 
             let btnTitle = sender.title(for: .normal)
             
             selectedEffectsOnMeValues.append(btnTitle!)
+            section7_e1 = 1
         }
         
         selectedEffectsOnMeValues = selectedEffectsOnMeValues.filter{ !valueToRemoveOnEffectsOnMe.contains($0) }
@@ -1599,6 +1798,8 @@ class ShareLessonInputPageViewController: UIViewController, UITextViewDelegate, 
             let btnTitle = sender.title(for: .normal)
             
             valueToRemoveOnEffectsOnMe.append(btnTitle!)
+            
+            section7_e3 = 0
         }
         else{
             isMentalStateSelected = true
@@ -1610,6 +1811,7 @@ class ShareLessonInputPageViewController: UIViewController, UITextViewDelegate, 
             let btnTitle = sender.title(for: .normal)
             
             selectedEffectsOnMeValues.append(btnTitle!)
+            section7_e3 = 1
         }
         
         selectedEffectsOnMeValues = selectedEffectsOnMeValues.filter{ !valueToRemoveOnEffectsOnMe.contains($0) }
@@ -1630,6 +1832,7 @@ class ShareLessonInputPageViewController: UIViewController, UITextViewDelegate, 
             let btnTitle = sender.title(for: .normal)
             
             valueToRemoveOnEffectsOnMe.append(btnTitle!)
+            section7_e5 = 0
         }
         else{
             isSocialStatusSelected = true
@@ -1641,6 +1844,7 @@ class ShareLessonInputPageViewController: UIViewController, UITextViewDelegate, 
             let btnTitle = sender.title(for: .normal)
             
             selectedEffectsOnMeValues.append(btnTitle!)
+            section7_e5 = 1
         }
         
         selectedEffectsOnMeValues = selectedEffectsOnMeValues.filter{ !valueToRemoveOnEffectsOnMe.contains($0) }
@@ -1661,6 +1865,7 @@ class ShareLessonInputPageViewController: UIViewController, UITextViewDelegate, 
             let btnTitle = sender.title(for: .normal)
             
             valueToRemoveOnEffectsOnMe.append(btnTitle!)
+            section7_e7 = 0
         }
         else{
             isFinanceSelected = true
@@ -1672,6 +1877,7 @@ class ShareLessonInputPageViewController: UIViewController, UITextViewDelegate, 
             let btnTitle = sender.title(for: .normal)
             
             selectedEffectsOnMeValues.append(btnTitle!)
+            section7_e7 = 0
         }
         
         selectedEffectsOnMeValues = selectedEffectsOnMeValues.filter{ !valueToRemoveOnEffectsOnMe.contains($0) }
@@ -1693,6 +1899,7 @@ class ShareLessonInputPageViewController: UIViewController, UITextViewDelegate, 
             let btnTitle = sender.title(for: .normal)
             
             valueToRemoveOnEffectsOnMe.append(btnTitle!)
+            section7_e2 = 0
         }
         else{
             isPropertySelected = true
@@ -1704,6 +1911,7 @@ class ShareLessonInputPageViewController: UIViewController, UITextViewDelegate, 
             let btnTitle = sender.title(for: .normal)
             
             selectedEffectsOnMeValues.append(btnTitle!)
+            section7_e2 = 1
         }
         
         selectedEffectsOnMeValues = selectedEffectsOnMeValues.filter{ !valueToRemoveOnEffectsOnMe.contains($0) }
@@ -1725,6 +1933,7 @@ class ShareLessonInputPageViewController: UIViewController, UITextViewDelegate, 
             let btnTitle = sender.title(for: .normal)
             
             valueToRemoveOnEffectsOnMe.append(btnTitle!)
+            section7_e4 = 0
         }
         else{
             isMindsetSelected = true
@@ -1736,6 +1945,7 @@ class ShareLessonInputPageViewController: UIViewController, UITextViewDelegate, 
             let btnTitle = sender.title(for: .normal)
             
             selectedEffectsOnMeValues.append(btnTitle!)
+            section7_e4 = 1
         }
         
         selectedEffectsOnMeValues = selectedEffectsOnMeValues.filter{ !valueToRemoveOnEffectsOnMe.contains($0) }
@@ -1757,6 +1967,7 @@ class ShareLessonInputPageViewController: UIViewController, UITextViewDelegate, 
             let btnTitle = sender.title(for: .normal)
             
             valueToRemoveOnEffectsOnMe.append(btnTitle!)
+            section7_e6 = 0
         }
         else{
             isRelationshipSelected = true
@@ -1768,6 +1979,7 @@ class ShareLessonInputPageViewController: UIViewController, UITextViewDelegate, 
             let btnTitle = sender.title(for: .normal)
             
             selectedEffectsOnMeValues.append(btnTitle!)
+            section7_e6 = 1
         }
         
         selectedEffectsOnMeValues = selectedEffectsOnMeValues.filter{ !valueToRemoveOnEffectsOnMe.contains($0) }
@@ -1790,6 +2002,7 @@ class ShareLessonInputPageViewController: UIViewController, UITextViewDelegate, 
             let btnTitle = sender.title(for: .normal)
             
             valueToRemoveOnEffectsOnMe.append(btnTitle!)
+            section7_e8 = 0
         }
         else{
             isWayOfLifSelected = true
@@ -1801,6 +2014,7 @@ class ShareLessonInputPageViewController: UIViewController, UITextViewDelegate, 
             let btnTitle = sender.title(for: .normal)
             
             selectedEffectsOnMeValues.append(btnTitle!)
+             section7_e8 = 1
         }
         
         selectedEffectsOnMeValues = selectedEffectsOnMeValues.filter{ !valueToRemoveOnEffectsOnMe.contains($0) }
@@ -1841,7 +2055,7 @@ class ShareLessonInputPageViewController: UIViewController, UITextViewDelegate, 
         imgAcceptance2.image = UIImage(named: "a2_normal")
         lblA2Text.textColor = UIColor.darkGray
         
-        selectedRootCause = "-"
+        section8 = 0
             
             isW1Selected = false
         }else {
@@ -1878,6 +2092,11 @@ class ShareLessonInputPageViewController: UIViewController, UITextViewDelegate, 
             isA1Selected = false
             isA2Selected = false
             
+           
+            section8 = 1
+            
+            
+            
             
         }
     }
@@ -1910,7 +2129,7 @@ class ShareLessonInputPageViewController: UIViewController, UITextViewDelegate, 
         imgAcceptance2.image = UIImage(named: "a2_normal")
         lblA2Text.textColor = UIColor.darkGray
         
-        selectedRootCause = "-"
+        section8 = 0
             
             isW2Selected = false
             
@@ -1949,7 +2168,7 @@ class ShareLessonInputPageViewController: UIViewController, UITextViewDelegate, 
             isA1Selected = false
             isA2Selected = false
             
-            
+            section8 = 2
         }
         
     }
@@ -1982,7 +2201,7 @@ class ShareLessonInputPageViewController: UIViewController, UITextViewDelegate, 
         imgAcceptance2.image = UIImage(named: "a2_normal")
         lblA2Text.textColor = UIColor.darkGray
         
-        selectedRootCause = "-"
+        section8 = 0
             
             isL1Selected = false
             
@@ -2021,6 +2240,7 @@ class ShareLessonInputPageViewController: UIViewController, UITextViewDelegate, 
             isA1Selected = false
             isA2Selected = false
             
+            section8 = 3
         }
     }
     
@@ -2056,6 +2276,7 @@ class ShareLessonInputPageViewController: UIViewController, UITextViewDelegate, 
         selectedRootCause = self.lblL2Text.text!
             
             isL2Selected = false
+            section8 = 0
             
         }else {
            
@@ -2091,6 +2312,7 @@ class ShareLessonInputPageViewController: UIViewController, UITextViewDelegate, 
             isL2Selected = true
             isA1Selected = false
             isA2Selected = false
+            section8 = 4
         }
     }
     
@@ -2123,7 +2345,7 @@ class ShareLessonInputPageViewController: UIViewController, UITextViewDelegate, 
         imgAcceptance2.image = UIImage(named: "a2_normal")
         lblA2Text.textColor = UIColor.darkGray
         
-        selectedRootCause = "-"
+        section8 = 0
             
             isA1Selected = false
             
@@ -2162,6 +2384,8 @@ class ShareLessonInputPageViewController: UIViewController, UITextViewDelegate, 
             isA1Selected = true
             isA2Selected = false
             
+            section8 = 5
+            
         }
     }
     
@@ -2193,7 +2417,7 @@ class ShareLessonInputPageViewController: UIViewController, UITextViewDelegate, 
         imgAcceptance2.image = UIImage(named: "a2_normal")
         lblA2Text.textColor = UIColor.darkGray
         
-        selectedRootCause = self.lblA2Text.text!
+        section8 = 0
             
             isA2Selected = false
             
@@ -2232,6 +2456,7 @@ class ShareLessonInputPageViewController: UIViewController, UITextViewDelegate, 
             isA1Selected = false
             isA2Selected = true
             
+            section8 = 6
         }
     }
     
@@ -2250,6 +2475,7 @@ class ShareLessonInputPageViewController: UIViewController, UITextViewDelegate, 
             
             isEveryoneSelected = false
             
+            section10 = 0
         }else {
             
             self.viewEveryone.backgroundColor = darkBlue
@@ -2264,6 +2490,7 @@ class ShareLessonInputPageViewController: UIViewController, UITextViewDelegate, 
             
             isEveryoneSelected = true
             isNobodySelected = false
+            section10 = 1
         }
         
     }
@@ -2283,7 +2510,7 @@ class ShareLessonInputPageViewController: UIViewController, UITextViewDelegate, 
         self.lblEveryoneContent.textColor = darkBlue
             
             isNobodySelected = false
-            
+            section10 = 0
         }else {
           
             self.viewNobody.backgroundColor = darkBlue
@@ -2298,7 +2525,7 @@ class ShareLessonInputPageViewController: UIViewController, UITextViewDelegate, 
             
             isNobodySelected = true
             isEveryoneSelected = false
-            
+            section10 = 2
         }
     }
     
@@ -2315,6 +2542,7 @@ class ShareLessonInputPageViewController: UIViewController, UITextViewDelegate, 
         self.btnVeryHigh.backgroundColor = UIColor.white
             
             isVeryLowSelected = false
+            section7_scale = 0
         }else{
             
             self.btnVeryLow.backgroundColor = darkBlue
@@ -2329,6 +2557,8 @@ class ShareLessonInputPageViewController: UIViewController, UITextViewDelegate, 
         isMediumSelected = false
         isHighSelected = false
         isVeryHighSelected = false
+            
+            section7_scale = 1
         }
         
     }
@@ -2346,6 +2576,7 @@ class ShareLessonInputPageViewController: UIViewController, UITextViewDelegate, 
         self.btnVeryHigh.backgroundColor = UIColor.white
             
             isLowSelected = false
+            section7_scale = 0
         }else{
             self.btnVeryLow.backgroundColor = UIColor.white
             
@@ -2360,6 +2591,8 @@ class ShareLessonInputPageViewController: UIViewController, UITextViewDelegate, 
             isMediumSelected = false
             isHighSelected = false
             isVeryHighSelected = false
+            
+            section7_scale = 2
         }
     }
     
@@ -2376,6 +2609,7 @@ class ShareLessonInputPageViewController: UIViewController, UITextViewDelegate, 
         self.btnVeryHigh.backgroundColor = UIColor.white
             
             isMediumSelected = false
+            section7_scale = 0
         }else{
             self.btnVeryLow.backgroundColor = UIColor.white
             
@@ -2390,7 +2624,7 @@ class ShareLessonInputPageViewController: UIViewController, UITextViewDelegate, 
             isMediumSelected = true
             isHighSelected = false
             isVeryHighSelected = false
-            
+            section7_scale = 3
         }
     }
     
@@ -2408,6 +2642,7 @@ class ShareLessonInputPageViewController: UIViewController, UITextViewDelegate, 
         self.btnVeryHigh.backgroundColor = UIColor.white
           
             isHighSelected = false
+            section7_scale = 0
         }else {
             self.btnVeryLow.backgroundColor = UIColor.white
             
@@ -2422,7 +2657,7 @@ class ShareLessonInputPageViewController: UIViewController, UITextViewDelegate, 
             isMediumSelected = false
             isHighSelected = true
             isVeryHighSelected = false
-            
+            section7_scale = 4
         }
     }
     
@@ -2438,6 +2673,7 @@ class ShareLessonInputPageViewController: UIViewController, UITextViewDelegate, 
         self.btnVeryHigh.backgroundColor = UIColor.white
             
             isVeryHighSelected = false
+            section7_scale = 0
         }else{
             self.btnVeryLow.backgroundColor = UIColor.white
             
@@ -2452,7 +2688,7 @@ class ShareLessonInputPageViewController: UIViewController, UITextViewDelegate, 
             isMediumSelected = false
             isHighSelected = false
             isVeryHighSelected = true
-            
+            section7_scale = 5
         }
         
     }

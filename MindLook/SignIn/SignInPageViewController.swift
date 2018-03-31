@@ -79,20 +79,8 @@ class SignInPageViewController: UIViewController {
                     
                     let result = String(data: data!, encoding: .utf8)
                     
-                    if result == "1" {
-                        
-                        let alert = UIAlertController(title: "Success!!!", message: "Sign In successfully.", preferredStyle: UIAlertControllerStyle.alert)
-                        alert.addAction(UIAlertAction(title: "Continue", style: UIAlertActionStyle.default, handler:   { action in
-                            
-                            // do something like...
-                            self.gotoMain()
-                            
-                        }))
-                        
-                        self.present(alert, animated: true, completion: nil)
-                        
-                    }
-                    else if result == "0"{
+                    
+                    if result == "0"{
                         
                         let alert = UIAlertController(title: "Email Not Reristered.", message: "Your email is not yet registered in our system. Please register first to use our app, Thank you!!!", preferredStyle: UIAlertControllerStyle.alert)
                         alert.addAction(UIAlertAction(title: "Register", style: UIAlertActionStyle.default, handler:   { action in
@@ -150,6 +138,20 @@ class SignInPageViewController: UIViewController {
                         }))
                         
                         self.present(alert, animated: true, completion: nil)
+                        
+                    }else{
+                         UserDefaults.standard.setValue(result, forKey: "userid")
+                            
+                            let alert = UIAlertController(title: "Success!!!", message: "Sign In successfully.", preferredStyle: UIAlertControllerStyle.alert)
+                            alert.addAction(UIAlertAction(title: "Continue", style: UIAlertActionStyle.default, handler:   { action in
+                                
+                                // do something like...
+                                self.gotoMain()
+                                
+                            }))
+                            
+                            self.present(alert, animated: true, completion: nil)
+                            
                         
                     }
                     
